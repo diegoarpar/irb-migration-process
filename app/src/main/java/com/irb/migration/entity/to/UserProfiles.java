@@ -15,8 +15,9 @@ public class UserProfiles {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
-    @Column(name = "UserId")
-    public String UserId;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    public AspNetUsers UserId;
 
     @Column(name = "FirstName")
     public String FirstName;
@@ -45,8 +46,8 @@ public class UserProfiles {
     @Column(name = "LastLogin", columnDefinition = "DATE")
     public Date LastLogin;
 
-    @Column(name = "University")
-    public Integer University;
+    @ManyToOne (cascade = CascadeType.ALL)
+    public Universities University;
 
     @Column(name = "Address")
     public String Address;
