@@ -4,7 +4,8 @@
 package com.irb.migration;
 
 import com.google.inject.Guice;
-import com.irb.migration.service.ETL;
+import com.irb.migration.service.ETLApplications;
+import com.irb.migration.service.ETLUsers;
 
 public class App {
     public String getGreeting() {
@@ -13,8 +14,12 @@ public class App {
 
     public static void main(String[] args) {
         System.setProperty("eclipselink.ddl-generation", "update");
-        ETL etl = Guice.createInjector().getInstance(ETL.class);
-        etl.StartETL();
+        ETLUsers etlUsers = Guice.createInjector().getInstance(ETLUsers.class);
+        etlUsers.StartETL();
+
+
+        ETLApplications etlApplications = Guice.createInjector().getInstance(ETLApplications.class);
+        etlApplications.StartETL();
         System.out.println(new App().getGreeting());
     }
 }
