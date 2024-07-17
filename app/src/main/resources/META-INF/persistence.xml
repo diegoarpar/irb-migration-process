@@ -5,6 +5,7 @@
              version="3.0">
     <persistence-unit name="sourcePU" transaction-type="RESOURCE_LOCAL">
         <class>com.irb.migration.entity.from.UserDetails</class>
+        <class>com.irb.migration.entity.from.ApplicationFormBasic</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -20,6 +21,8 @@
         <class>com.irb.migration.entity.to.UserProfiles</class>
         <class>com.irb.migration.entity.to.AspNetUsers</class>
         <class>com.irb.migration.entity.to.Universities</class>
+        <class>com.irb.migration.entity.to.AspNetUserClaims</class>
+        <class>com.irb.migration.entity.to.IrbApplications</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -27,6 +30,23 @@
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="destPUR" transaction-type="RESOURCE_LOCAL">
+        <class>com.irb.migration.entity.to.UserProfiles</class>
+        <class>com.irb.migration.entity.to.AspNetUsers</class>
+        <class>com.irb.migration.entity.to.Universities</class>
+        <class>com.irb.migration.entity.to.AspNetUserClaims</class>
+        <class>com.irb.migration.entity.to.IrbApplications</class>
+        <properties>
+            <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=newdbtest;encrypt=false;trustServerCertificate=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>

@@ -1,6 +1,7 @@
 package com.irb.migration.service.transforms;
 
 import com.irb.migration.entity.from.UserDetails;
+import com.irb.migration.entity.to.AspNetUserClaims;
 import com.irb.migration.entity.to.AspNetUsers;
 import com.irb.migration.entity.to.Universities;
 import com.irb.migration.entity.to.UserProfiles;
@@ -15,6 +16,7 @@ public class UserProfilesTransformation implements ETLTransformation<UserProfile
         Universities universities = new Universities();
         universities.Name = "Gannon University";
         return sourceData.stream().map(source -> {
+            AspNetUserClaims aspNetUserClaims = new AspNetUserClaims();
             AspNetUsers aspNetUsers = new AspNetUsers();
             aspNetUsers.UserName = source.gu_email;
             aspNetUsers.NormalizedEmail = source.gu_email.toUpperCase();
@@ -45,6 +47,10 @@ public class UserProfilesTransformation implements ETLTransformation<UserProfile
             userProfileUser.ResearchArea = source.research_area;
             userProfileUser.Gender = source.gender;
             userProfileUser.Role = source.user_type;
+
+            aspNetUserClaims.UserId = aspNetUsers;
+            aspNetUserClaims.ClaimType ="role";
+            aspNetUserClaims.ClaimValue = source.user_type;
 
 
             return userProfileUser;

@@ -17,6 +17,7 @@ public class UserProfiles {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="UserId", nullable=false)
     public AspNetUsers UserId;
 
     @Column(name = "FirstName")
@@ -47,6 +48,7 @@ public class UserProfiles {
     public Date LastLogin;
 
     @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name="University", nullable=false)
     public Universities University;
 
     @Column(name = "Address")

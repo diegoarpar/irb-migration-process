@@ -17,5 +17,18 @@ public class Universities {
     public String Name;
 
 
+    @Column(name = "Logo")
+    public String Logo;
+
+    @Column(name = "Description")
+    public String Description;
+
+    @Column(name = "AdminId")
+    public String AdminId;
+
+    @Column(name = "CreatedDate", columnDefinition = "DATE")
+    public Date CreatedDate;
+
+
 
 }

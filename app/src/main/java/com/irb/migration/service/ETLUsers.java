@@ -1,6 +1,8 @@
 package com.irb.migration.service;
 
+import com.irb.migration.entity.from.ApplicationFormBasic;
 import com.irb.migration.entity.from.UserDetails;
+import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.UserProfiles;
 import com.irb.migration.service.transforms.ELTFactoryTransformation;
 import jakarta.inject.Inject;
@@ -10,18 +12,23 @@ import jakarta.persistence.Persistence;
 
 import java.util.List;
 
-public class ETL {
+public class ETLUsers {
 
     @Inject
     public ELTFactoryTransformation eltFactoryTransformation;
 
+    EntityManagerFactory sourceEMF = Persistence.createEntityManagerFactory("sourcePU");
+    EntityManager sourceEM = sourceEMF.createEntityManager();
+
+
+    EntityManagerFactory destEMF = Persistence.createEntityManagerFactory("destPU");
+    EntityManager destEM = destEMF.createEntityManager();
+
+    EntityManagerFactory destEMFR = Persistence.createEntityManagerFactory("destPUR");
+
+    EntityManager destEMR = destEMFR.createEntityManager();
     public boolean StartETL() {
-        EntityManagerFactory sourceEMF = Persistence.createEntityManagerFactory("sourcePU");
-        EntityManager sourceEM = sourceEMF.createEntityManager();
 
-
-        EntityManagerFactory destEMF = Persistence.createEntityManagerFactory("destPU");
-        EntityManager destEM = destEMF.createEntityManager();
 
         try {
             // Extract data from source
@@ -48,4 +55,6 @@ public class ETL {
         }
         return true;
     }
+
+
 }
