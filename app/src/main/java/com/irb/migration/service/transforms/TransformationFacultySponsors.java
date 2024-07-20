@@ -23,6 +23,8 @@ public class TransformationFacultySponsors implements ETLTransformation<FacultyS
     public List<FacultySponsors> TransformData(List<FApplicationFormBasic> origin, Map... data) {
         return origin.stream().map(source -> {
             if (Strings.isNullOrEmpty(source.email) || "Not Required".equalsIgnoreCase(source.factdtlvalidate)
+                    || "N/A".equalsIgnoreCase(source.sponsor_name_degree)
+                    || "N/A".equalsIgnoreCase(source.faculty_sponsor_sign)
                     || "N/A".equalsIgnoreCase(source.email)) {
                 return null;
             }
@@ -36,14 +38,16 @@ public class TransformationFacultySponsors implements ETLTransformation<FacultyS
                 sponsor.NormalizedEmail  = source.email.toUpperCase();
                 sponsor.Email = source.email;
                 sponsor.UserName = source.email;
+                data[0].put(sponsor.NormalizedEmail, sponsor);
             }
+
             FacultySponsors facultySponsors = new FacultySponsors();
 
             facultySponsors.IrbApplicationId = application;
             facultySponsors.UserId = sponsor;
             facultySponsors.SponsorDegree = source.sponsor_name_degree;
             facultySponsors.Email = source.email;
-            facultySponsors.Fullname = source.email;
+            facultySponsors.Fullname = String.format("%s %s", sponsor.NormalizedEmail, sponsor.NormalizedEmail);
             facultySponsors.ReseachDescription = source.description;
             facultySponsors.Address = source.faculty_sponsor_office;
             facultySponsors.Signature = source.faculty_sponsor_sign;
@@ -52,34 +56,5 @@ public class TransformationFacultySponsors implements ETLTransformation<FacultyS
         }).filter(Objects::nonNull).collect(Collectors.toList());
     }
 
-    private String getRoles(String userType, String isUserAdmin, String hasAdminPrivilages) {
-        String role = "";
-        if (Strings.isNullOrEmpty(userType)) {
-            switch (userType) {
-                case "Student":
-                    role = "student";
-                    break;
-                case "IRB Staff":
-                    role = "irbmember";
-                    break;
-                case "GU Staff":
-                    role = "irbchair";
-                    break;
-                case "Faculty":
-                    role = "faculty";
-                    break;
-                case "Admin":
-                    role = "irbchair, admin";
-                    break;
-            }
-            if ("yes".equalsIgnoreCase(isUserAdmin) || "yes".equalsIgnoreCase(hasAdminPrivilages)) {
-                if (!Strings.isNullOrEmpty(role) && !role.contains("admin")) {
-                    role = String.format("%s,%s", role, "admin");
-                } else {
-                    role = "irbchair, admin";
-                }
-            }
-        }
-        return role;
-    }
+
 }

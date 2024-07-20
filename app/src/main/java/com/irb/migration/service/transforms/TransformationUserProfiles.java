@@ -65,29 +65,20 @@ public class TransformationUserProfiles implements ETLTransformation<UserProfile
 
     private String getRoles(String userType, String isUserAdmin, String hasAdminPrivilages) {
         String role = "";
-        if (Strings.isNullOrEmpty(userType)) {
-            switch (userType) {
-                case "Student":
-                    role = "student";
-                    break;
-                case "IRB Staff":
-                    role = "irbmember";
-                    break;
-                case "GU Staff":
-                    role = "irbchair";
-                    break;
-                case "Faculty":
-                    role = "faculty";
-                    break;
-                case "Admin":
-                    role = "irbchair, admin";
-                    break;
-            }
+        if (!Strings.isNullOrEmpty(userType)) {
+            role = switch (userType) {
+                case "Student" -> "student";
+                case "IRB Staff" -> "irbmember";
+                case "GU Staff" -> "irbchair";
+                case "Faculty" -> "faculty";
+                case "Admin" -> "irbchair,admin";
+                default -> role;
+            };
             if ("yes".equalsIgnoreCase(isUserAdmin) || "yes".equalsIgnoreCase(hasAdminPrivilages)) {
                 if (!Strings.isNullOrEmpty(role) && !role.contains("admin")) {
                     role = String.format("%s,%s", role, "admin");
                 } else {
-                    role = "irbchair, admin";
+                    role = "irbchair,admin";
                 }
             }
         }

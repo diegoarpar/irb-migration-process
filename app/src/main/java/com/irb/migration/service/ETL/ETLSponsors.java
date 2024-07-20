@@ -4,6 +4,7 @@ import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.to.AspNetUsers;
 import com.irb.migration.entity.to.FacultySponsors;
 import com.irb.migration.entity.to.IrbApplications;
+import com.irb.migration.entity.to.UserProfiles;
 import com.irb.migration.service.transforms.ELTFactoryTransformation;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
