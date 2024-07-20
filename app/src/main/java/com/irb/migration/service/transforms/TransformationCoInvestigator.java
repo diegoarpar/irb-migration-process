@@ -3,10 +3,7 @@ package com.irb.migration.service.transforms;
 import com.google.common.base.Strings;
 import com.irb.migration.entity.from.FCoinvestigator;
 import com.irb.migration.entity.from.FScreening;
-import com.irb.migration.entity.to.AspNetUsers;
-import com.irb.migration.entity.to.CoInvestigators;
-import com.irb.migration.entity.to.IrbApplications;
-import com.irb.migration.entity.to.Screenings;
+import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
 
@@ -137,6 +134,8 @@ public class TransformationCoInvestigator implements ETLTransformation<CoInvesti
         if (Strings.isNullOrEmpty(application_id)
             || Strings.isNullOrEmpty(coinvestiEmail1)
                 || Strings.isNullOrEmpty(coinvestiName1)
+                || "N/A".equalsIgnoreCase(coinvestiEmail1)
+                || "N/A".equalsIgnoreCase(coinvestiName1)
         ) {
             return  null;
         }
@@ -145,16 +144,21 @@ public class TransformationCoInvestigator implements ETLTransformation<CoInvesti
         if (coInvestigators.IrbApplicationId == null) {
             return  null;
         }
-        coInvestigators.IrbUserId = (AspNetUsers) users.get(coinvestiEmail1.toUpperCase());
-        if (coInvestigators.IrbUserId == null) {
-            coInvestigators.IrbUserId = new AspNetUsers();
-            coInvestigators.IrbUserId.Email = coinvestiEmail1;
-            coInvestigators.IrbUserId.NormalizedEmail = coinvestiEmail1.toUpperCase();
-            coInvestigators.IrbUserId.UserName = coinvestiEmail1;
+        AspNetUsers coInvestigatorUser = (AspNetUsers) users.get(coinvestiEmail1.toUpperCase());
+        if (coInvestigatorUser == null) {
+            coInvestigatorUser = new AspNetUsers();
+            coInvestigatorUser.Email = coinvestiEmail1;
+            coInvestigatorUser.PhoneNumber = coinvestiPhone1;
+            coInvestigatorUser.NormalizedEmail = coinvestiEmail1.toUpperCase();
+            coInvestigatorUser.UserName = coinvestiEmail1;
+
+            users.put(coInvestigatorUser.NormalizedEmail, coInvestigatorUser);
         }
+        coInvestigators.IrbUserId = coInvestigatorUser;
+        coInvestigators.Firstname = coinvestiName1;
+        coInvestigators.Lastname = coinvestiName1;
         coInvestigators.Email = coinvestiEmail1;
-        coInvestigators.Firstname = coinvestiEmail1;
-        coInvestigators.Lastname = coinvestiEmail1;
+
         coInvestigators.Address = coinvestiAddress1;
         coInvestigators.Signature = coinvestiSignInit1;
         coInvestigators.Phone = coinvestiPhone1;

@@ -23,11 +23,8 @@ public class TransformationApplication implements ETLTransformation<IrbApplicati
     public List<IrbApplications> TransformData(List<FApplicationFormBasic> origin, Map... data) {
         return origin.stream().map(source -> {
             IrbApplications  application = new IrbApplications();
-            application.UserId = (AspNetUsers) data[0].get(source.gu_email.toUpperCase());
-            if (application.UserId == null) {
-                return null;
-            }
-
+            AspNetUsers userProfiles = (AspNetUsers) data[0].get(source.gu_email.toUpperCase());
+            application.UserId = userProfiles;
             application.Title = source.title_of_research;
             application.Description = source.description;
             application.TypeOfReview = getTypeOfReview(source.typeofreview);
@@ -61,18 +58,6 @@ public class TransformationApplication implements ETLTransformation<IrbApplicati
 
         return null;
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     private String getTypeOfReview(String typeofreview) {
