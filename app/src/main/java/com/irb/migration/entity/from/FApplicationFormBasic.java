@@ -6,12 +6,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-import java.util.Date;
-
 
 @Entity
 @Table(name = "tblirbappformbasicdtl")
-public class ApplicationFormBasic {
+public class FApplicationFormBasic {
 
     @Id
     @Column(name = "application_id")

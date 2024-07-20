@@ -52,7 +52,7 @@ public class AspNetUsers {
     @Column(name = "LockoutEnabled")
     public Integer LockoutEnabled;
 
-    @Column(name = "")
+    @Column(name = "AccessFailedCount")
     public Integer AccessFailedCount;
 
 }

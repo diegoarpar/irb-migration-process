@@ -4,8 +4,10 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="sourcePU" transaction-type="RESOURCE_LOCAL">
-        <class>com.irb.migration.entity.from.UserDetails</class>
-        <class>com.irb.migration.entity.from.ApplicationFormBasic</class>
+        <class>com.irb.migration.entity.from.FUserDetails</class>
+        <class>com.irb.migration.entity.from.FApplicationFormBasic</class>
+        <class>com.irb.migration.entity.from.FScreening</class>
+        <class>com.irb.migration.entity.from.FCoinvestigator</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -23,13 +25,16 @@
         <class>com.irb.migration.entity.to.Universities</class>
         <class>com.irb.migration.entity.to.AspNetUserClaims</class>
         <class>com.irb.migration.entity.to.IrbApplications</class>
+        <class>com.irb.migration.entity.to.FacultySponsors</class>
+        <class>com.irb.migration.entity.to.Screenings</class>
+        <class>com.irb.migration.entity.to.CoInvestigators</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=newdbtest;encrypt=false;trustServerCertificate=true"/>
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
-            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
     </persistence-unit>
@@ -40,6 +45,9 @@
         <class>com.irb.migration.entity.to.Universities</class>
         <class>com.irb.migration.entity.to.AspNetUserClaims</class>
         <class>com.irb.migration.entity.to.IrbApplications</class>
+        <class>com.irb.migration.entity.to.FacultySponsors</class>
+        <class>com.irb.migration.entity.to.Screenings</class>
+        <class>com.irb.migration.entity.to.CoInvestigators</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
