@@ -1,18 +1,19 @@
 package com.irb.migration.service.transforms;
 
 import com.google.inject.Guice;
-import com.irb.migration.entity.from.ApplicationFormBasic;
-import com.irb.migration.entity.from.UserDetails;
 
 public class ELTFactoryTransformation {
 
-    public ETLTransformation getTransformation(Object object) {
+    public ETLTransformation getTransformation(String key) {
 
-        if (object instanceof UserDetails) {
-            return  Guice.createInjector().getInstance(UserProfilesTransformation.class);
-        } else if (object instanceof ApplicationFormBasic) {
-            return  Guice.createInjector().getInstance(ApplicationTransformation.class);
+        switch (key) {
+            case "application" : return Guice.createInjector().getInstance(TransformationApplication.class);
+            case "user" : return Guice.createInjector().getInstance(TransformationUserProfiles.class);
+            case "sponsor" : return Guice.createInjector().getInstance(TransformationFacultySponsors.class);
+            case "screening" : return Guice.createInjector().getInstance(TransformationScreening.class);
+            case "coinvestigator" : return Guice.createInjector().getInstance(TransformationCoInvestigator.class);
         }
+
         return null;
 
     }

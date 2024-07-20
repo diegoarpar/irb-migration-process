@@ -14,10 +14,10 @@ public class IrbApplications {
     public Integer Id;
 
     @ManyToOne
-    @JoinColumn(name="UserId", nullable=true)
+    @JoinColumn(name="UserId")
     public AspNetUsers UserId;
 
-
+    @Lob
     @Column(name = "Title")
     public String Title;
 
@@ -48,6 +48,7 @@ public class IrbApplications {
     @Column(name = "Completion")
     public Integer Completion;
 
+    @Lob
     @Column(name = "Description")
     public String Description;
 

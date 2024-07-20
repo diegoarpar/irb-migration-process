@@ -11,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user_details")
-public class UserDetails {
+public class FUserDetails {
 
     @Column(name = "admin_approval")
     public String admin_approval;
