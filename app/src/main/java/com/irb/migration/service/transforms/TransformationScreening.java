@@ -1,21 +1,16 @@
 package com.irb.migration.service.transforms;
 
-import com.google.common.base.Strings;
-import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.from.FScreening;
 import com.irb.migration.entity.to.AspNetUsers;
-import com.irb.migration.entity.to.FacultySponsors;
-import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.Screenings;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class TransformationScreening implements ETLTransformation<Screenings, FScreening> {
+public class TransformationScreening implements IETLTransformation<Screenings, FScreening> {
 
     @Inject
     public Helper helper;

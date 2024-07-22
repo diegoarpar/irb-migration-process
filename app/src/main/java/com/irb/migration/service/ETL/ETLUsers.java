@@ -10,7 +10,7 @@ import jakarta.persistence.Persistence;
 
 import java.util.List;
 
-public class ETLUsers {
+public class ETLUsers implements IETL{
 
     @Inject
     public ELTFactoryTransformation eltFactoryTransformation;

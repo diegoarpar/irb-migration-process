@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TransformationApplication implements ETLTransformation<IrbApplications, FApplicationFormBasic> {
+public class TransformationApplication implements IETLTransformation<IrbApplications, FApplicationFormBasic> {
 
     public List<IrbApplications> TransformData(List<FApplicationFormBasic> sourceData) {
 

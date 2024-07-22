@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class TransformationFacultySponsors implements ETLTransformation<FacultySponsors, FApplicationFormBasic> {
+public class TransformationFacultySponsors implements IETLTransformation<FacultySponsors, FApplicationFormBasic> {
 
     @Inject
     public Helper helper;

@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class TransformationUserProfiles implements ETLTransformation<UserProfiles, FUserDetails> {
+public class TransformationUserProfiles implements IETLTransformation<UserProfiles, FUserDetails> {
 
     @Inject
     public Helper helper;
