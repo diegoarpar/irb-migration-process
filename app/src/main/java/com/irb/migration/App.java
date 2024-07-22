@@ -13,21 +13,23 @@ public class App {
 
     public static void main(String[] args) {
         System.setProperty("eclipselink.ddl-generation", "update");
-        ETLUsers etlUsers = Guice.createInjector().getInstance(ETLUsers.class);
-        etlUsers.StartETL();
+        IETL etl = Guice.createInjector().getInstance(ETLUsers.class);
+        etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLApplications.class);
+        etl.StartETL();
 
-        ETLApplications etlApplications = Guice.createInjector().getInstance(ETLApplications.class);
-        etlApplications.StartETL();
+        etl = Guice.createInjector().getInstance(ETLSponsors.class);
+        etl.StartETL();
 
-        ETLSponsors etlSponsors = Guice.createInjector().getInstance(ETLSponsors.class);
-        etlSponsors.StartETL();
+        etl = Guice.createInjector().getInstance(ETLScreening.class);
+        etl.StartETL();
 
-        ETLScreening etlSpcreening = Guice.createInjector().getInstance(ETLScreening.class);
-        etlSpcreening.StartETL();
+        etl = Guice.createInjector().getInstance(ETLCoInvestigator.class);
+        etl.StartETL();
 
-        ETLCoInvestigator etlCoInvestigator = Guice.createInjector().getInstance(ETLCoInvestigator.class);
-        etlCoInvestigator.StartETL();
+        etl = Guice.createInjector().getInstance(ETLDatahandling.class);
+        etl.StartETL();
 
         System.out.println(new App().getGreeting());
     }

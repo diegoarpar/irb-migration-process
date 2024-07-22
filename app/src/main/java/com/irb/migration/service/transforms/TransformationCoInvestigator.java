@@ -2,7 +2,6 @@ package com.irb.migration.service.transforms;
 
 import com.google.common.base.Strings;
 import com.irb.migration.entity.from.FCoinvestigator;
-import com.irb.migration.entity.from.FScreening;
 import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
@@ -10,10 +9,8 @@ import jakarta.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
-public class TransformationCoInvestigator implements ETLTransformation<CoInvestigators, FCoinvestigator> {
+public class TransformationCoInvestigator implements IETLTransformation<CoInvestigators, FCoinvestigator> {
 
     @Inject
     public Helper helper;

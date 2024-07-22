@@ -1,8 +1,11 @@
 package com.irb.migration.service.ETL;
 
-import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.from.FCoinvestigator;
-import com.irb.migration.entity.to.*;
+import com.irb.migration.entity.from.FDataHandling;
+import com.irb.migration.entity.to.AspNetUsers;
+import com.irb.migration.entity.to.CoInvestigators;
+import com.irb.migration.entity.to.DataHandling;
+import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.service.transforms.ELTFactoryTransformation;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -13,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ETLCoInvestigator implements IETL{
+public class ETLDatahandling implements IETL{
 
     @Inject
     public ELTFactoryTransformation eltFactoryTransformation;
@@ -27,7 +30,7 @@ public class ETLCoInvestigator implements IETL{
         EntityManager destEM = destEMF.createEntityManager();
 
         // Extract data from source
-        List<FCoinvestigator> sourceData = sourceEM.createQuery("SELECT s FROM FCoinvestigator s", FCoinvestigator.class).getResultList();
+        List<FDataHandling> sourceData = sourceEM.createQuery("SELECT s FROM FDataHandling s", FDataHandling.class).getResultList();
         List<AspNetUsers> users = destEM.createQuery("SELECT s FROM AspNetUsers s", AspNetUsers.class).getResultList();
         List<IrbApplications> applications = destEM.createQuery("SELECT s FROM IrbApplications s", IrbApplications.class).getResultList();
 
@@ -36,11 +39,11 @@ public class ETLCoInvestigator implements IETL{
         applications = null;
         users = null;
         // Transform data
-        List<CoInvestigators> transformedData = eltFactoryTransformation.getTransformation("coinvestigator").TransformData(sourceData, usersMap, applicatinosMap);
+        List<DataHandling> transformedData = eltFactoryTransformation.getTransformation("datahandling").TransformData(sourceData, usersMap, applicatinosMap);
 
         // Load data into destination
         destEM.getTransaction().begin();
-        for (CoInvestigators destEntity : transformedData) {
+        for (DataHandling destEntity : transformedData) {
             destEM.persist(destEntity);
         }
         destEM.getTransaction().commit();
