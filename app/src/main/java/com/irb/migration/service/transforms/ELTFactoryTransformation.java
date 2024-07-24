@@ -13,6 +13,7 @@ public class ELTFactoryTransformation {
             case "screening" : return Guice.createInjector().getInstance(TransformationScreening.class);
             case "coinvestigator" : return Guice.createInjector().getInstance(TransformationCoInvestigator.class);
             case "datahandling" : return Guice.createInjector().getInstance(TransformationDataHandling.class);
+            case "userclaim" : return Guice.createInjector().getInstance(TransformationUserClaims.class);
         }
 
         return null;

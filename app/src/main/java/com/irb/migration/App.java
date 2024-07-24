@@ -16,6 +16,9 @@ public class App {
         IETL etl = Guice.createInjector().getInstance(ETLUsers.class);
         etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLUserClaims.class);
+        etl.StartETL();
+
         etl = Guice.createInjector().getInstance(ETLApplications.class);
         etl.StartETL();
 

@@ -23,7 +23,7 @@ public class TransformationUserProfiles implements IETLTransformation<UserProfil
         universities.Name = "Gannon University";
         universities.CreatedDate = new Date();
         return sourceData.stream().map(source -> {
-            AspNetUserClaims aspNetUserClaims = new AspNetUserClaims();
+
             AspNetUsers aspNetUsers = new AspNetUsers();
             aspNetUsers.NormalizedEmail = source.gu_email.toUpperCase();
             aspNetUsers.Email = source.gu_email;
@@ -54,9 +54,7 @@ public class TransformationUserProfiles implements IETLTransformation<UserProfil
             userProfileUser.Role = getRoles(source.user_type, source.IsUserAdmin, source.HasAdminPrivilages);
             userProfileUser.CreatedDate = new Date();
 
-            aspNetUserClaims.UserId = aspNetUsers;
-            aspNetUserClaims.ClaimType ="role";
-            aspNetUserClaims.ClaimValue = source.user_type;
+
 
 
             return userProfileUser;
