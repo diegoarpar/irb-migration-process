@@ -24,6 +24,18 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
         return origin.stream().map(source -> {
             IrbApplications  application = new IrbApplications();
             AspNetUsers userProfiles = (AspNetUsers) data[0].get(source.gu_email.toUpperCase());
+            if (userProfiles == null) {
+                userProfiles = new AspNetUsers();
+                userProfiles.UserName = source.gu_email;
+                userProfiles.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.telephone)? 0 : 1;
+                userProfiles.PhoneNumber = source.telephone;
+                userProfiles.Email = source.gu_email;
+                userProfiles.EmailConfirmed = 1;
+                userProfiles.NormalizedEmail = source.gu_email.toUpperCase();
+                userProfiles.AccessFailedCount = 0;
+                userProfiles.LockoutEnabled = 1;
+                userProfiles.TwoFactorEnabled = 0;
+            }
             application.UserId = userProfiles;
             application.Title = source.title_of_research;
             application.Description = source.description;
@@ -35,6 +47,7 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
             application.IrbDate = helper.toDateSlash(source.decision_date);
             application.IrbStatus = source.irbappstatus;
             application.IrbExpireDate = helper.toDateSlash(source.irb_approval_expires);
+            application.Completion  = 0;
             return application;
         }).collect(Collectors.toList());
     }
