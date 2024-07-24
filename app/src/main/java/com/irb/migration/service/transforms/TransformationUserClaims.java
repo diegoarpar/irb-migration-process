@@ -10,10 +10,7 @@ import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class TransformationUserClaims implements IETLTransformation<AspNetUserClaims, FUserDetails> {
@@ -26,14 +23,20 @@ public class TransformationUserClaims implements IETLTransformation<AspNetUserCl
 
     @Override
     public List<AspNetUserClaims> TransformData(List<FUserDetails> origin, Map... data) {
-        return origin.stream().map(source -> {
-            AspNetUsers user = (AspNetUsers) data[0].get(source.gu_email.toUpperCase());
-            AspNetUserClaims aspNetUserClaims = new AspNetUserClaims();
-            aspNetUserClaims.UserId = user;
-            aspNetUserClaims.ClaimType ="role";
-            aspNetUserClaims.ClaimValue = getRoles(source.user_type, source.IsUserAdmin, source.HasAdminPrivilages);
-            return aspNetUserClaims;
-        }).collect(Collectors.toList());
+        List<AspNetUserClaims> list = new ArrayList<>();
+        for (FUserDetails o : origin ) {
+            String role = getRoles(o.user_type, o.IsUserAdmin, o.HasAdminPrivilages);
+            AspNetUsers user = (AspNetUsers) data[0].get(o.gu_email.toUpperCase());
+            String[] roles = role.split(",");
+            for (String s : roles) {
+                AspNetUserClaims aspNetUserClaims = new AspNetUserClaims();
+                aspNetUserClaims.UserId = user;
+                aspNetUserClaims.ClaimType ="role";
+                aspNetUserClaims.ClaimValue = s;
+                list.add(aspNetUserClaims);
+            }
+        }
+        return list;
     }
 
     private String getRoles(String userType, String isUserAdmin, String hasAdminPrivilages) {
@@ -44,13 +47,16 @@ public class TransformationUserClaims implements IETLTransformation<AspNetUserCl
                 case "IRB Staff" -> "irbmember";
                 case "GU Staff" -> "irbchair";
                 case "Faculty" -> "faculty";
-                case "Admin" ->  "admin";
+                case "Admin" -> "irbchair,admin";
                 default -> role;
             };
             if ("yes".equalsIgnoreCase(isUserAdmin) || "yes".equalsIgnoreCase(hasAdminPrivilages)) {
-                    role = "admin";
+                if (!Strings.isNullOrEmpty(role) && !role.contains("admin")) {
+                    role = String.format("%s,%s", role, "admin");
+                } else {
+                    role = "irbchair,admin";
+                }
             }
-
         }
         return role;
     }
