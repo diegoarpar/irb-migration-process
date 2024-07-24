@@ -13,7 +13,7 @@ public class IrbApplications {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="UserId")
     public AspNetUsers UserId;
 

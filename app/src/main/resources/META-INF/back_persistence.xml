@@ -31,7 +31,7 @@
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://EC2AMAZ-TQPGUI6\\SQLEXPRESS:1433;databaseName=newdbtest;integratedSecurity=true;encrypt=false;maxPoolSize=200"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://EC2AMAZ-TQPGUI6\\SQLEXPRESS:1433;databaseName=migrationdb;integratedSecurity=true;encrypt=false;maxPoolSize=200"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
             <property name="hibernate.show_sql" value="true"/>
         </properties>
