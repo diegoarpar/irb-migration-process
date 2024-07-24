@@ -37,7 +37,7 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
             if (sponsor == null) {
                 sponsor = new AspNetUsers();
                 sponsor.NormalizedEmail  = source.email.toUpperCase();
-                sponsor.NormalizedUserName = source.gu_email.toUpperCase();
+                sponsor.NormalizedUserName = source.email.toUpperCase();
                 sponsor.Email = source.email;
                 sponsor.TwoFactorEnabled = 0;
                 sponsor.UserName = source.email;
@@ -46,6 +46,7 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
                 sponsor.LockoutEnabled = 1;
                 sponsor.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.telephone)? 0:1;
                 sponsor.PhoneNumber = source.telephone;
+                sponsor.SecurityStamp =  helper.generateRandomStamp();
                 data[0].put(sponsor.NormalizedEmail, sponsor);
             }
 

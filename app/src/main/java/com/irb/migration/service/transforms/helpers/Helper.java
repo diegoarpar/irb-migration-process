@@ -2,6 +2,7 @@ package com.irb.migration.service.transforms.helpers;
 
 import jakarta.inject.Singleton;
 
+import java.security.SecureRandom;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -23,4 +24,18 @@ public class Helper {
             return null;
         }
     }
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+    public String generateRandomStamp() {
+        SecureRandom random = new SecureRandom();
+        int length = 32;
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            int index = random.nextInt(CHARACTERS.length());
+            sb.append(CHARACTERS.charAt(index));
+        }
+
+        return sb.toString();
+    }
+
 }

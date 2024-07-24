@@ -36,6 +36,8 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
                 userProfiles.AccessFailedCount = 0;
                 userProfiles.LockoutEnabled = 1;
                 userProfiles.TwoFactorEnabled = 0;
+                userProfiles.SecurityStamp =  helper.generateRandomStamp();
+
                 data[0].put(userProfiles.NormalizedEmail, userProfiles);
             }
             application.UserId = userProfiles;

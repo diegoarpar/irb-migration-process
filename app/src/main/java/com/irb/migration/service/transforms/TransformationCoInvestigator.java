@@ -156,7 +156,7 @@ public class TransformationCoInvestigator implements IETLTransformation<CoInvest
             coInvestigatorUser.AccessFailedCount = 0;
             coInvestigatorUser.PhoneNumberConfirmed = Strings.isNullOrEmpty(coinvestiPhone1)? 0: 1 ;
             coInvestigatorUser.EmailConfirmed = Strings.isNullOrEmpty(coinvestiEmail1)? 0: 1 ;
-
+            coInvestigatorUser.SecurityStamp =  helper.generateRandomStamp();
 
             users.put(coInvestigatorUser.NormalizedEmail, coInvestigatorUser);
         }
