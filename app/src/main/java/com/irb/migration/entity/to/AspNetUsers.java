@@ -10,8 +10,8 @@ public class AspNetUsers {
 
     @jakarta.persistence.Id
     @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    public Integer Id;
+    @GeneratedValue(strategy= GenerationType.UUID)
+    public String Id;
 
     @Column(name = "UserName")
     public String UserName;
@@ -40,19 +40,19 @@ public class AspNetUsers {
     @Column(name = "PhoneNumber")
     public String PhoneNumber;
 
-    @Column(name = "PhoneNumberConfirmed")
-    public String PhoneNumberConfirmed;
+    @Column(name = "PhoneNumberConfirmed", nullable = false)
+    public Integer PhoneNumberConfirmed;
 
-    @Column(name = "TwoFactorEnabled")
-    public String TwoFactorEnabled;
+    @Column(name = "TwoFactorEnabled", nullable = false)
+    public Integer TwoFactorEnabled;
 
     @Column(name = "LockoutEnd", columnDefinition = "DATE")
     public Date LockoutEnd;
 
-    @Column(name = "LockoutEnabled")
+    @Column(name = "LockoutEnabled", nullable = false)
     public Integer LockoutEnabled;
 
-    @Column(name = "AccessFailedCount")
+    @Column(name = "AccessFailedCount",  nullable = false)
     public Integer AccessFailedCount;
 
 }

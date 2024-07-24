@@ -6,6 +6,7 @@ import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -37,7 +38,13 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
                 sponsor = new AspNetUsers();
                 sponsor.NormalizedEmail  = source.email.toUpperCase();
                 sponsor.Email = source.email;
+                sponsor.TwoFactorEnabled = 0;
                 sponsor.UserName = source.email;
+                sponsor.AccessFailedCount = 0;
+                sponsor.EmailConfirmed = 1;
+                sponsor.LockoutEnabled = 1;
+                sponsor.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.telephone)? 0:1;
+                sponsor.PhoneNumber = source.telephone;
                 data[0].put(sponsor.NormalizedEmail, sponsor);
             }
 
@@ -52,6 +59,7 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
             facultySponsors.Address = source.faculty_sponsor_office;
             facultySponsors.Signature = source.faculty_sponsor_sign;
             facultySponsors.IsApproved = "approved".equalsIgnoreCase(source.factdtlvalidate)? 1: 0;
+            facultySponsors.CreatedDate = new Date();
             return facultySponsors;
         }).filter(Objects::nonNull).collect(Collectors.toList());
     }

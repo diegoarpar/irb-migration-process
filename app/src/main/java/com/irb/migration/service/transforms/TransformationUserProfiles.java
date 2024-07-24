@@ -9,6 +9,7 @@ import com.irb.migration.entity.to.UserProfiles;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,6 +21,7 @@ public class TransformationUserProfiles implements IETLTransformation<UserProfil
     public List<UserProfiles> TransformData(List<FUserDetails> sourceData) {
         Universities universities = new Universities();
         universities.Name = "Gannon University";
+        universities.CreatedDate = new Date();
         return sourceData.stream().map(source -> {
             AspNetUserClaims aspNetUserClaims = new AspNetUserClaims();
             AspNetUsers aspNetUsers = new AspNetUsers();
@@ -28,10 +30,11 @@ public class TransformationUserProfiles implements IETLTransformation<UserProfil
             aspNetUsers.EmailConfirmed = "1".equalsIgnoreCase(source.admin_approval)? 1: 0 ;
             aspNetUsers.UserName = source.gu_email;
             aspNetUsers.PhoneNumber = source.contact_no;
-            aspNetUsers.PhoneNumberConfirmed = source.contact_no;
-            aspNetUsers.TwoFactorEnabled = "0";
+            aspNetUsers.TwoFactorEnabled = 0;
             aspNetUsers.LockoutEnabled = 1;
             aspNetUsers.AccessFailedCount = 0;
+
+            aspNetUsers.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.contact_no)? 0: 1 ;
 
             UserProfiles userProfileUser = new UserProfiles();
             userProfileUser.UserId = aspNetUsers;
@@ -48,6 +51,7 @@ public class TransformationUserProfiles implements IETLTransformation<UserProfil
             userProfileUser.ResearchArea = source.research_area;
             userProfileUser.Gender = source.gender;
             userProfileUser.Role = getRoles(source.user_type, source.IsUserAdmin, source.HasAdminPrivilages);
+            userProfileUser.CreatedDate = new Date();
 
             aspNetUserClaims.UserId = aspNetUsers;
             aspNetUserClaims.ClaimType ="role";

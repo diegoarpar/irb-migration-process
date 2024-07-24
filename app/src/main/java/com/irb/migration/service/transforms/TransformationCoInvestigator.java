@@ -7,6 +7,7 @@ import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -149,12 +150,21 @@ public class TransformationCoInvestigator implements IETLTransformation<CoInvest
             coInvestigatorUser.NormalizedEmail = coinvestiEmail1.toUpperCase();
             coInvestigatorUser.UserName = coinvestiEmail1;
 
+            coInvestigatorUser.TwoFactorEnabled = 0;
+            coInvestigatorUser.LockoutEnabled = 1;
+            coInvestigatorUser.AccessFailedCount = 0;
+            coInvestigatorUser.PhoneNumberConfirmed = Strings.isNullOrEmpty(coinvestiPhone1)? 0: 1 ;
+            coInvestigatorUser.EmailConfirmed = Strings.isNullOrEmpty(coinvestiEmail1)? 0: 1 ;
+
+
             users.put(coInvestigatorUser.NormalizedEmail, coInvestigatorUser);
         }
         coInvestigators.IrbUserId = coInvestigatorUser;
         coInvestigators.Firstname = coinvestiName1;
         coInvestigators.Lastname = coinvestiName1;
         coInvestigators.Email = coinvestiEmail1;
+        coInvestigators.CreatedDate = new Date();
+        coInvestigators.UpdatedDate = new Date();
 
         coInvestigators.Address = coinvestiAddress1;
         coInvestigators.Signature = coinvestiSignInit1;
