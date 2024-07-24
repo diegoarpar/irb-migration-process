@@ -32,6 +32,7 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
                 userProfiles.Email = source.gu_email;
                 userProfiles.EmailConfirmed = 1;
                 userProfiles.NormalizedEmail = source.gu_email.toUpperCase();
+                userProfiles.NormalizedUserName = source.gu_email.toUpperCase();
                 userProfiles.AccessFailedCount = 0;
                 userProfiles.LockoutEnabled = 1;
                 userProfiles.TwoFactorEnabled = 0;

@@ -37,6 +37,7 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
             if (sponsor == null) {
                 sponsor = new AspNetUsers();
                 sponsor.NormalizedEmail  = source.email.toUpperCase();
+                sponsor.NormalizedUserName = source.gu_email.toUpperCase();
                 sponsor.Email = source.email;
                 sponsor.TwoFactorEnabled = 0;
                 sponsor.UserName = source.email;

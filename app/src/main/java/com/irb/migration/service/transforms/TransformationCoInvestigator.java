@@ -149,6 +149,7 @@ public class TransformationCoInvestigator implements IETLTransformation<CoInvest
             coInvestigatorUser.PhoneNumber = coinvestiPhone1;
             coInvestigatorUser.NormalizedEmail = coinvestiEmail1.toUpperCase();
             coInvestigatorUser.UserName = coinvestiEmail1;
+            coInvestigatorUser.NormalizedUserName = coinvestiEmail1.toUpperCase();
 
             coInvestigatorUser.TwoFactorEnabled = 0;
             coInvestigatorUser.LockoutEnabled = 1;

@@ -33,6 +33,7 @@ public class TransformationUserProfiles implements IETLTransformation<UserProfil
             aspNetUsers.TwoFactorEnabled = 0;
             aspNetUsers.LockoutEnabled = 1;
             aspNetUsers.AccessFailedCount = 0;
+            aspNetUsers.NormalizedUserName = source.gu_email.toUpperCase();
 
             aspNetUsers.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.contact_no)? 0: 1 ;
 
