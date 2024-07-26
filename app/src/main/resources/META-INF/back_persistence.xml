@@ -9,6 +9,7 @@
         <class>com.irb.migration.entity.from.FScreening</class>
         <class>com.irb.migration.entity.from.FCoinvestigator</class>
         <class>com.irb.migration.entity.from.FDataHandling</class>
+        <class>com.irb.migration.entity.from.FIssues</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -28,6 +29,7 @@
         <class>com.irb.migration.entity.to.Screenings</class>
         <class>com.irb.migration.entity.to.CoInvestigators</class>
         <class>com.irb.migration.entity.to.DataHandling</class>
+        <class>com.irb.migration.entity.to.Issues</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -47,6 +49,7 @@
         <class>com.irb.migration.entity.to.Screenings</class>
         <class>com.irb.migration.entity.to.CoInvestigators</class>
         <class>com.irb.migration.entity.to.DataHandling</class>
+        <class>com.irb.migration.entity.to.Issues</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
