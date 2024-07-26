@@ -1,5 +1,6 @@
 package com.irb.migration.service.transforms.helpers;
 
+import com.google.common.base.Strings;
 import jakarta.inject.Singleton;
 
 import java.security.SecureRandom;
@@ -15,6 +16,14 @@ public class Helper {
         } catch(Exception e) {
             return null;
         }
+    }
+
+    public String toCategory(String category) {
+        if (Strings.isNullOrEmpty(category)) {
+            return "";
+        }
+        String number = category.substring(category.length() -1);
+        return String.format("%s %s", "Category", number);
     }
 
     public Date toDateSlash(String date) {
