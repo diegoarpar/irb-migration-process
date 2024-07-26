@@ -9,7 +9,7 @@ import java.util.Date;
 public class AspNetUsers {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
+    @Column(name = "Id")
     @GeneratedValue(strategy= GenerationType.UUID)
     public String Id;
 

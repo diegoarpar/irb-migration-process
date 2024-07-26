@@ -34,6 +34,9 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLDatahandling.class);
         etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLIssues.class);
+        etl.StartETL();
+
         System.out.println(new App().getGreeting());
     }
 }
