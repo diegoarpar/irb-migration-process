@@ -43,6 +43,12 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLExempted.class);
         etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLTransactionsLogsEmail.class);
+        etl.StartETL();
+
+        etl = Guice.createInjector().getInstance(ETLTransactionsLogsChangeUserType.class);
+        etl.StartETL();
+
         System.out.println(new App().getGreeting());
     }
 }

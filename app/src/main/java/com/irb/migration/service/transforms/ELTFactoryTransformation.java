@@ -17,6 +17,8 @@ public class ELTFactoryTransformation {
             case "issues" : return Guice.createInjector().getInstance(TransformationIssues.class);
             case "expedited" : return Guice.createInjector().getInstance(TransformationExpedited.class);
             case "exempted" : return Guice.createInjector().getInstance(TransformationExempted.class);
+            case "email" : return Guice.createInjector().getInstance(TransformationTransactionLogsEmail.class);
+            case "changeuser" : return Guice.createInjector().getInstance(TransformationTransactionLogsChangeUser.class);
         }
 
         return null;

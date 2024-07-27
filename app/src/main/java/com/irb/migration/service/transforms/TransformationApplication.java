@@ -49,7 +49,7 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
             application.SubmittedDate = helper.toDateSlash(source.date_of_submission);
             application.CreatedDate = helper.toDateSlash(source.date_of_submission);
             application.IrbDate = helper.toDateSlash(source.decision_date);
-            application.IrbStatus = source.irbappstatus;
+            application.IrbStatus = getIrbStatus(source.irbappstatus);
             application.IrbExpireDate = helper.toDateSlash(source.irb_approval_expires);
             application.Completion  = 0;
             return application;
