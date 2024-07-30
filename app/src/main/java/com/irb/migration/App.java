@@ -49,6 +49,9 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLTransactionsLogsChangeUserType.class);
         etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLReviewersApplication.class);
+        etl.StartETL();
+
         System.out.println(new App().getGreeting());
     }
 }

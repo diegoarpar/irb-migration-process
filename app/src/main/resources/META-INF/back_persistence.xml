@@ -36,6 +36,7 @@
         <class>com.irb.migration.entity.to.Issues</class>
         <class>com.irb.migration.entity.to.NonStandards</class>
         <class>com.irb.migration.entity.to.TransactionLogs</class>
+        <class>com.irb.migration.entity.to.Reviewers</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -58,6 +59,7 @@
         <class>com.irb.migration.entity.to.Issues</class>
         <class>com.irb.migration.entity.to.NonStandards</class>
         <class>com.irb.migration.entity.to.TransactionLogs</class>
+        <class>com.irb.migration.entity.to.Reviewers</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
