@@ -45,11 +45,11 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
             application.Description = source.description;
             application.TypeOfReview = getTypeOfReview(source.typeofreview);
             application.ApplicationCode = source.application_id;
-            application.AppStatus = getStatus(source.date_of_submission, source.editable_app);
+            application.AppStatus = getStatus(source.date_of_submission, source.editable_app, source.decision_date, source.factdtlvalidate, source.title_of_research, source.irbappstatus);
             application.SubmittedDate = helper.toDateSlash(source.date_of_submission);
             application.CreatedDate = helper.toDateSlash(source.date_of_submission);
             application.IrbDate = helper.toDateSlash(source.decision_date);
-            application.IrbStatus = getIrbStatus(source.irbappstatus);
+            application.IrbStatus = getIrbStatus(source.irbappstatus, source.factdtlvalidate);
             application.IrbExpireDate = helper.toDateSlash(source.irb_approval_expires);
             application.Completion  = 0;
             return application;
@@ -57,20 +57,47 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
     }
 
 
-    private String getStatus(String typeofreview, String editable_app) {
-        if (Strings.isNullOrEmpty(typeofreview) || "yes".equalsIgnoreCase(editable_app)) {
+    private String getStatus(String typeofreview, String editable_app,
+                             String decisionDate, String facultyValidate, String title,
+                            String irbStatus) {
+
+        if ("submited".equalsIgnoreCase(irbStatus)) {
+            return "Submitted";
+        }
+        if ("approved with recommendations".equalsIgnoreCase(irbStatus)) {
+            return "Submitted";
+        }
+
+        if ("approved".equalsIgnoreCase(irbStatus)) {
+            return "Submitted";
+        }
+
+        if (Strings.isNullOrEmpty(typeofreview) || "yes".equalsIgnoreCase(editable_app)
+                || (Strings.isNullOrEmpty(decisionDate) && "pending".equalsIgnoreCase(facultyValidate))
+            || Strings.isNullOrEmpty(title)) {
             return "Editing";
+        }
+
+        if ("rejected".equalsIgnoreCase(facultyValidate)) {
+            return "Rejected";
+        }
+
+        if ( (Strings.isNullOrEmpty(decisionDate) && "approved".equalsIgnoreCase(facultyValidate))) {
+            return "SponsorApproved";
         }
 
         return "Submitted";
     }
-    private String getIrbStatus(String irbStatus) {
+    private String getIrbStatus(String irbStatus, String faculty) {
         switch (irbStatus) {
             case "approved": return "Approved";
             case "approved with recommendations": return "Approved with recommendations";
-            case "pending": return "Editing";
             case "rejected": return "Rejected";
             case "submited": return "Under Review";
+        }
+
+        if ("reject".equalsIgnoreCase(faculty)) {
+            return "Rejected";
         }
 
         return null;
