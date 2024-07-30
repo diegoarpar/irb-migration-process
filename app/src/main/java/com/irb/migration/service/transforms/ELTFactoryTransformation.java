@@ -19,6 +19,7 @@ public class ELTFactoryTransformation {
             case "exempted" : return Guice.createInjector().getInstance(TransformationExempted.class);
             case "email" : return Guice.createInjector().getInstance(TransformationTransactionLogsEmail.class);
             case "changeuser" : return Guice.createInjector().getInstance(TransformationTransactionLogsChangeUser.class);
+            case "reviewersapp" : return Guice.createInjector().getInstance(TransformationReviewersApp.class);
         }
 
         return null;
