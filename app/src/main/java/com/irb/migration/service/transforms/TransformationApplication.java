@@ -68,7 +68,7 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
         switch (irbStatus) {
             case "approved": return "Approved";
             case "approved with recommendations": return "Approved with recommendations";
-            case "pending": return "Pending";
+            case "pending": return "Editing";
             case "rejected": return "Rejected";
             case "submited": return "Under Review";
         }
