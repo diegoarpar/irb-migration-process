@@ -20,6 +20,7 @@ public class ELTFactoryTransformation {
             case "email" : return Guice.createInjector().getInstance(TransformationTransactionLogsEmail.class);
             case "changeuser" : return Guice.createInjector().getInstance(TransformationTransactionLogsChangeUser.class);
             case "reviewersapp" : return Guice.createInjector().getInstance(TransformationReviewersApp.class);
+            case "vote" : return Guice.createInjector().getInstance(TransformationVote.class);
         }
 
         return null;
