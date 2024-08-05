@@ -47,4 +47,7 @@ public class Helper {
         return sb.toString();
     }
 
+    public Integer fromYesNoToInt(String data) {
+        return "yes".equalsIgnoreCase(data)? 1: 0;
+    }
 }
