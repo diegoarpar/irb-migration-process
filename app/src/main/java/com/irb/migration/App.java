@@ -55,6 +55,9 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLVote.class);
         etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLInformedConsents.class);
+        etl.StartETL();
+
         etl = null;
 
         System.out.println(new App().getGreeting());
