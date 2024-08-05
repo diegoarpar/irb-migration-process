@@ -5,6 +5,7 @@ import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -41,8 +42,8 @@ public class TransformationDataHandling implements IETLTransformation<DataHandli
             dataHandling.Field58c = source.sch_mthd_even_destruct;
             dataHandling.Field58d = source.sch_mthd_raw_data;
             dataHandling.Field58e = source.sch_mthd_even_destruct;
-            dataHandling.CreatedDate = application.SubmittedDate;
-            dataHandling.UpdatedDate = application.SubmittedDate;
+            dataHandling.CreatedDate = application.SubmittedDate != null? application.SubmittedDate: new Date();
+            dataHandling.UpdatedDate = dataHandling.CreatedDate;
 
             return dataHandling;
         }).filter(Objects::nonNull).collect(Collectors.toList());

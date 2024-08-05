@@ -16,6 +16,7 @@
         <class>com.irb.migration.entity.from.FChangeUserType</class>
         <class>com.irb.migration.entity.from.FStandardDecision</class>
         <class>com.irb.migration.entity.from.FInformedConsent</class>
+        <class>com.irb.migration.entity.from.FRiskFactor</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -41,6 +42,7 @@
         <class>com.irb.migration.entity.to.Reviewers</class>
         <class>com.irb.migration.entity.to.StandardVotes</class>
         <class>com.irb.migration.entity.to.InformedConsents</class>
+        <class>com.irb.migration.entity.to.RiskFactors</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -66,6 +68,7 @@
         <class>com.irb.migration.entity.to.Reviewers</class>
         <class>com.irb.migration.entity.to.StandardVotes</class>
         <class>com.irb.migration.entity.to.InformedConsents</class>
+        <class>com.irb.migration.entity.to.RiskFactors</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
