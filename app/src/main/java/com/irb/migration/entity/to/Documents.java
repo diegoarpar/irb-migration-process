@@ -43,6 +43,6 @@ public class Documents {
     @Column(name = "Classification")
     public String Classification;
 
-    @Column(name = "data")
+    @Column(name = "Data")
     public byte[] data;
 }

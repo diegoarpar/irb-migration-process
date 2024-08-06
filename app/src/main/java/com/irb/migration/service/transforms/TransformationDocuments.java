@@ -26,7 +26,7 @@ public class TransformationDocuments implements IETLTransformation<Documents, FD
                 continue;
             }
 
-            if (fDoc.data != null) {
+            if (!Strings.isNullOrEmpty(fDoc.content_type )) {
                 Documents document1 =  getDocumentBasicInfo(fDoc, application);
                 document1.Name = fDoc.file_name;
                 document1.Type = fDoc.content_type;

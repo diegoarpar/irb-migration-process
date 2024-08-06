@@ -40,4 +40,18 @@ public class FDocuments {
     @Lob
     @Column(name = "hyperlink3")
     public String hyperlink3;
+
+    public FDocuments(String application_id, String file_name, String content_type,  String notes, String hyperlink1, String hyperlink2, String hyperlink3) {
+        this.application_id = application_id;
+        this.file_name = file_name;
+        this.content_type = content_type;
+        this.notes = notes;
+        this.hyperlink1 = hyperlink1;
+        this.hyperlink2 = hyperlink2;
+        this.hyperlink3 = hyperlink3;
+    }
+
+    public FDocuments(byte[] data) {
+        this.data = data;
+    }
 }
