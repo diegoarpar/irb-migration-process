@@ -23,6 +23,7 @@ public class ELTFactoryTransformation {
             case "vote" : return Guice.createInjector().getInstance(TransformationVote.class);
             case "informed" : return Guice.createInjector().getInstance(TransformationInformedConsent.class);
             case "risk" : return Guice.createInjector().getInstance(TransformationRiskFactors.class);
+            case "documents" : return Guice.createInjector().getInstance(TransformationDocuments.class);
         }
 
         return null;
