@@ -43,22 +43,25 @@ public class ETLDocuments implements IETL {
         usersMap = null;
         applicatinosMap = null;
         // Load data into destination
-        destEM.getTransaction().begin();
+
         for (Documents destEntity : transformedData) {
             List<FDocuments> documents = sourceEM.createQuery("SELECT new FDocuments(s.data) FROM FDocuments s where s.application_id = :appId", FDocuments.class).setParameter("appId", destEntity.IrbApplicationId.ApplicationCode).getResultList();
-
+            destEM.getTransaction().begin();
             for (FDocuments fd : documents) {
                 if (!Objects.isNull(fd.data)) {
                     destEntity.data = fd.data;
                 }
             }
             if (destEntity.data == null && Strings.isNullOrEmpty(destEntity.Url)) {
+                destEM.getTransaction().commit();
                 continue;
             }
             destEM.persist(destEntity);
+            destEM.getTransaction().commit();
             destEntity.data = null;
+
         }
-        destEM.getTransaction().commit();
+
 
         System.out.println("ETL process completed successfully.");
 
