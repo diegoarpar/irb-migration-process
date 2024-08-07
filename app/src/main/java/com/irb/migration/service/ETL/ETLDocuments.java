@@ -10,6 +10,9 @@ import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaUpdate;
+import jakarta.persistence.criteria.Root;
 
 import java.util.List;
 import java.util.Map;
@@ -44,9 +47,8 @@ public class ETLDocuments implements IETL {
         applicatinosMap = null;
         // Load data into destination
 
-
+        destEM.getTransaction().begin();
         for (Documents destEntity : transformedData) {
-            destEM.getTransaction().begin();
             Documents newDoc = new Documents();
             newDoc.IrbApplicationId = destEntity.IrbApplicationId;
             newDoc.UserId = destEntity.UserId;
@@ -56,27 +58,49 @@ public class ETLDocuments implements IETL {
             newDoc.CreatedDate = destEntity.CreatedDate;
             newDoc.UpdatedDate = destEntity.UpdatedDate;
             newDoc.Classification = destEntity.Classification;
+            destEM.persist(newDoc);
+        }
+        destEM.flush();
+        destEM.clear();
+        destEM.getTransaction().commit();
 
-            List<FDocuments> documents = sourceEM.createQuery("SELECT new FDocuments(s.data) FROM FDocuments s where s.application_id = :appId and s.file_name = :filename", FDocuments.class)
+        List<Documents> documents = destEM.createQuery("SELECT s FROM Documents s", Documents.class).getResultList();
+
+        destEM.getTransaction().begin();
+        for (Documents newDoc : documents) {
+            List<FDocuments> docs = sourceEM.createQuery("SELECT new FDocuments(s.data) FROM FDocuments s where s.application_id = :appId and s.file_name = :filename", FDocuments.class)
                     .setParameter("appId", newDoc.IrbApplicationId.ApplicationCode)
                     .setParameter("filename", newDoc.Name)
                     .getResultList();
-
-            for (FDocuments fd : documents) {
+            byte[] data = null;
+            for (FDocuments fd : docs) {
                 if (!Objects.isNull(fd.data)) {
-                    newDoc.data = fd.data;
+                    data = fd.data;
                 }
             }
-            if (newDoc.data == null && Strings.isNullOrEmpty(newDoc.Url)) {
-                destEM.getTransaction().commit();
+            if (data == null && Strings.isNullOrEmpty(newDoc.Url)) {
+
                 continue;
             }
-            destEM.persist(newDoc);
-            destEM.getTransaction().commit();
+
+            CriteriaBuilder cb = destEM.getCriteriaBuilder();
+
+            // create update
+            CriteriaUpdate<Documents> update = cb.
+                    createCriteriaUpdate(Documents.class);
+
+            // set the root class
+            Root e = update.from(Documents.class);
+
+            // set update and where clause
+            update.set("data", data);
+            update.where(cb.equal(e.get("Id"), newDoc.Id));
+
+            // perform update
+            destEM.createQuery(update).executeUpdate();
         }
 
-
-
+        destEM.getTransaction().commit();
         System.out.println("ETL process completed successfully.");
 
         sourceEM.close();
