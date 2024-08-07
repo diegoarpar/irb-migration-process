@@ -44,8 +44,9 @@ public class ETLDocuments implements IETL {
         applicatinosMap = null;
         // Load data into destination
 
-        destEM.getTransaction().begin();
+
         for (Documents destEntity : transformedData) {
+            destEM.getTransaction().begin();
             Documents newDoc = new Documents();
             newDoc.IrbApplicationId = destEntity.IrbApplicationId;
             newDoc.UserId = destEntity.UserId;
@@ -67,12 +68,13 @@ public class ETLDocuments implements IETL {
                 }
             }
             if (newDoc.data == null && Strings.isNullOrEmpty(newDoc.Url)) {
+                destEM.getTransaction().commit();
                 continue;
             }
             destEM.persist(newDoc);
-
+            destEM.getTransaction().commit();
         }
-        destEM.getTransaction().commit();
+
 
 
         System.out.println("ETL process completed successfully.");
