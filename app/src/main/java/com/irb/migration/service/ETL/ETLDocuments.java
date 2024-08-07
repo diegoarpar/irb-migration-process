@@ -44,23 +44,36 @@ public class ETLDocuments implements IETL {
         applicatinosMap = null;
         // Load data into destination
 
+        destEM.getTransaction().begin();
         for (Documents destEntity : transformedData) {
-            List<FDocuments> documents = sourceEM.createQuery("SELECT new FDocuments(s.data) FROM FDocuments s where s.application_id = :appId", FDocuments.class).setParameter("appId", destEntity.IrbApplicationId.ApplicationCode).getResultList();
-            destEM.getTransaction().begin();
+            Documents newDoc = new Documents();
+            newDoc.IrbApplicationId = destEntity.IrbApplicationId;
+            newDoc.UserId = destEntity.UserId;
+            newDoc.Type = destEntity.Type;
+            newDoc.Name = destEntity.Name;
+            newDoc.Url = destEntity.Url;
+            newDoc.CreatedDate = destEntity.CreatedDate;
+            newDoc.UpdatedDate = destEntity.UpdatedDate;
+            newDoc.Classification = destEntity.Classification;
+
+            List<FDocuments> documents = sourceEM.createQuery("SELECT new FDocuments(s.data) FROM FDocuments s where s.application_id = :appId and s.file_name = :filename", FDocuments.class)
+                    .setParameter("appId", newDoc.IrbApplicationId.ApplicationCode)
+                    .setParameter("filename", newDoc.Name)
+                    .getResultList();
+
             for (FDocuments fd : documents) {
                 if (!Objects.isNull(fd.data)) {
-                    destEntity.data = fd.data;
+                    newDoc.data = fd.data;
                 }
             }
-            if (destEntity.data == null && Strings.isNullOrEmpty(destEntity.Url)) {
+            if (newDoc.data == null && Strings.isNullOrEmpty(newDoc.Url)) {
                 destEM.getTransaction().commit();
                 continue;
             }
-            destEM.persist(destEntity);
-            destEM.getTransaction().commit();
-            destEntity.data = null;
+            destEM.persist(newDoc);
 
         }
+        destEM.getTransaction().commit();
 
 
         System.out.println("ETL process completed successfully.");
