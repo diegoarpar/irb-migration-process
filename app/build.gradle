@@ -47,7 +47,23 @@ java {
     }
 }
 
+
 application {
     // Define the main class for the application.
-    mainClass = 'org.example.App'
+    mainClass = 'com.irb.migration.App'
+}
+
+mainClassName = "com.irb.migration.App"
+
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    manifest {
+        attributes(
+                'Main-Class': "$mainClassName"
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
