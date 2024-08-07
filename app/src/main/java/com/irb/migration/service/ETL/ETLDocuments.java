@@ -40,7 +40,8 @@ public class ETLDocuments implements IETL {
         users = null;
         // Transform data
         List<Documents> transformedData = eltFactoryTransformation.getTransformation("documents").TransformData(sourceData, usersMap, applicatinosMap);
-
+        usersMap = null;
+        applicatinosMap = null;
         // Load data into destination
         destEM.getTransaction().begin();
         for (Documents destEntity : transformedData) {
@@ -55,6 +56,7 @@ public class ETLDocuments implements IETL {
                 continue;
             }
             destEM.persist(destEntity);
+            destEntity.data = null;
         }
         destEM.getTransaction().commit();
 
