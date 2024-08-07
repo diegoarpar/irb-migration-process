@@ -67,7 +67,6 @@ public class ETLDocuments implements IETL {
                 }
             }
             if (newDoc.data == null && Strings.isNullOrEmpty(newDoc.Url)) {
-                destEM.getTransaction().commit();
                 continue;
             }
             destEM.persist(newDoc);
