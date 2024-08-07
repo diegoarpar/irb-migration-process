@@ -22,6 +22,9 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLApplications.class);
         etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLDocuments.class);
+        etl.StartETL();
+
         etl = Guice.createInjector().getInstance(ETLSponsors.class);
         etl.StartETL();
 
@@ -61,8 +64,7 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLRiskFactors.class);
         etl.StartETL();
 
-        etl = Guice.createInjector().getInstance(ETLDocuments.class);
-        etl.StartETL();
+
 
         etl = null;
 
