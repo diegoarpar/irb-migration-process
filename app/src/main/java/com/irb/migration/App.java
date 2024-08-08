@@ -64,7 +64,11 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLRiskFactors.class);
         etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLNotificationForms.class);
+        etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLNotes.class);
+        etl.StartETL();
 
         etl = null;
 
