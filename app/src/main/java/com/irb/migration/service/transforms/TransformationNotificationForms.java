@@ -38,9 +38,13 @@ public class TransformationNotificationForms implements IETLTransformation<Notif
             if (application == null) {
                 return null;
             }
+            String userKuFound = null;
+            String userWokeFound = null;
+            if (!Strings.isNullOrEmpty(source.received_by_irb)) {
+                userKuFound = ku.stream().filter(s ->  source.received_by_irb.contains(s)).findFirst().orElse(null);
+                userWokeFound = woke.stream().filter(s -> source.received_by_irb.contains(s)).findFirst().orElse(null);
+            }
 
-            String userKuFound = ku.stream().filter(s -> s.contains(source.received_by_irb)).findFirst().orElse(null);
-            String userWokeFound = woke.stream().filter(s -> s.contains(source.received_by_irb)).findFirst().orElse(null);
 
             NotificationForms notificationForms = new NotificationForms();
 

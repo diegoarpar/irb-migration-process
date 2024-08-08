@@ -35,7 +35,7 @@ public class TransformationNotes implements IETLTransformation<ReviewNotes, FNot
             if (user == null) {
                 continue;
             }
-            int order = 1;
+
             if (!Strings.isNullOrEmpty(source.notes_subdefinedtl)) {
                 reviewNotes.add(getNote("Subject", source.notes_subdefinedtl, user, application, 2));
             }
