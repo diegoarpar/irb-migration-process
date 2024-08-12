@@ -52,7 +52,7 @@ public class TransformationNotificationForms implements IETLTransformation<Notif
             notificationForms.UserId = application.UserId;
 
             notificationForms.CreatedDate = helper.toDateSlash(source.date_submited);
-            notificationForms.NamePrinted = source.received_by_irb;
+            notificationForms.NamePrinted = source.name_printed;
             notificationForms.ReceivedBy = source.received_by_irb;
             notificationForms.Remarks = source.check_box_other;
             notificationForms.Position = source.position;

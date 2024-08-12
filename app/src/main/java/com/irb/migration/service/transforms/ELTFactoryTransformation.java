@@ -26,6 +26,8 @@ public class ELTFactoryTransformation {
             case "documents" : return Guice.createInjector().getInstance(TransformationDocuments.class);
             case "notificationforms" : return Guice.createInjector().getInstance(TransformationNotificationForms.class);
             case "notes" : return Guice.createInjector().getInstance(TransformationNotes.class);
+            case "subject" : return Guice.createInjector().getInstance(TransformationSubjectDefines.class);
+            case "research" : return Guice.createInjector().getInstance(TransformationResearchStudy.class);
         }
 
         return null;

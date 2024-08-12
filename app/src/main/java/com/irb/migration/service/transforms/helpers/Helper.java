@@ -33,6 +33,15 @@ public class Helper {
             return null;
         }
     }
+
+    public Date toDateMinus(String date) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch(Exception e) {
+            return null;
+        }
+    }
+
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     public String generateRandomStamp() {

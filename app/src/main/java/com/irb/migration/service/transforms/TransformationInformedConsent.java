@@ -36,7 +36,7 @@ public class TransformationInformedConsent implements IETLTransformation<Informe
             informedConsents.IrbApplicationId = application;
             informedConsents.UserId = application.UserId;
             informedConsents.ConsentType = getConsentType(source.type_of_consent);
-            informedConsents.FormDistribution = getConsentType(source.consent_form_distri);
+            informedConsents.FormDistribution = source.consent_form_distri;
             informedConsents.SubjectWithdraw = helper.fromYesNoToInt(source.sub_inf_withdraw);
             informedConsents.WrittenConsent = helper.fromYesNoToInt(source.writ_consent);
             informedConsents.WrittenConsentOther = source.writ_consent_other;
