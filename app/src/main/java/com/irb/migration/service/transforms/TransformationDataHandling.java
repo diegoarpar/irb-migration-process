@@ -1,5 +1,6 @@
 package com.irb.migration.service.transforms;
 
+import com.google.common.base.Strings;
 import com.irb.migration.entity.from.FDataHandling;
 import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
@@ -31,7 +32,7 @@ public class TransformationDataHandling implements IETLTransformation<DataHandli
 
             dataHandling.IrbApplicationId = application;
             dataHandling.UserId = application.UserId;
-            dataHandling.CollectMethod = source.data_collect_method; //meed modify @TODO
+            dataHandling.CollectMethod = getCollectMethod(source.data_collect_method);
             dataHandling.CollectMethodOther = source.data_collect_method + " " +source.field53other;
             dataHandling.Identifier = "yes".equalsIgnoreCase(source.data_collect_identi)? 1: 0;
             dataHandling.Analysis = "yes".equalsIgnoreCase(source.data_retain_identi_analysis)? 1: 0;
@@ -50,7 +51,30 @@ public class TransformationDataHandling implements IETLTransformation<DataHandli
 
     }
 
+    private String getCollectMethod(String dataCollectMethod) {
+        String consent = "1|Questionnaire or Survey|%s, 2|Intervention|%s, 3|Interview|%s, 4|Focus Group|%s,5|Observation|%s, 6|Testing / Evaluation|%s, 7|Video or Audio Tapping|%s, 8|Instruction / Curriculum|%s,9|Computer Collected Data|%s, 10|Physical Tasks|%s, 11|Archival Data|%s, 12|Other(Specify)|%s";
+        String survey1 = contains("Survey", dataCollectMethod);
+        String intervention2 = contains("Intervention", dataCollectMethod);
+        String interview3 = contains("Interview", dataCollectMethod);
+        String focusgroup4 = contains("Focus", dataCollectMethod);
+        String observation5 = contains("Observation", dataCollectMethod);
+        String testing6 = contains("Testing", dataCollectMethod);
+        String videoaudio7 = contains("Video", dataCollectMethod);
+        String instructtion8 = contains("Instruction", dataCollectMethod);
+        String collectdata9 = contains("Computer", dataCollectMethod);
+        String physicaltask10 = contains("Physical", dataCollectMethod);
+        String archivaldata11 = contains("Archival", dataCollectMethod);
+        String other12= contains("Other", dataCollectMethod);
+        return String.format(consent, survey1, intervention2, interview3, focusgroup4, observation5, testing6
+                , videoaudio7, instructtion8, collectdata9, physicaltask10, archivaldata11, other12);
+    }
 
+    private String contains(String word, String typeOfConsent) {
+        if (Strings.isNullOrEmpty(typeOfConsent)) {
+            return "False";
+        }
+        return typeOfConsent.contains(word) ? "True" : "False";
+    }
 
 
 }
