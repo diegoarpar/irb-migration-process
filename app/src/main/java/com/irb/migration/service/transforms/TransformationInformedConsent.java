@@ -1,13 +1,13 @@
 package com.irb.migration.service.transforms;
 
 import com.google.common.base.Strings;
-import com.irb.migration.entity.from.FDataHandling;
 import com.irb.migration.entity.from.FInformedConsent;
-import com.irb.migration.entity.to.DataHandling;
 import com.irb.migration.entity.to.InformedConsents;
 import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +16,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TransformationInformedConsent implements IETLTransformation<InformedConsents, FInformedConsent> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationInformedConsent.class.getName());
 
     @Inject
     public Helper helper;
@@ -29,6 +31,7 @@ public class TransformationInformedConsent implements IETLTransformation<Informe
 
             IrbApplications application = (IrbApplications) data[1].get(source.application_id.toUpperCase());
             if (application == null) {
+                LOGGER.error("MIGRATION: IRB does not exist when migrate information consent " + source.application_id);
                 return null;
             }
             InformedConsents informedConsents = new InformedConsents();

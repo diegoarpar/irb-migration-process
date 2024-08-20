@@ -2,12 +2,13 @@ package com.irb.migration.service.transforms;
 
 import com.google.common.base.Strings;
 import com.irb.migration.entity.from.FUserDetails;
-import com.irb.migration.entity.to.AspNetUserClaims;
 import com.irb.migration.entity.to.AspNetUsers;
 import com.irb.migration.entity.to.Universities;
 import com.irb.migration.entity.to.UserProfiles;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TransformationUserProfiles implements IETLTransformation<UserProfiles, FUserDetails> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationUserProfiles.class.getName());
+
 
     @Inject
     public Helper helper;

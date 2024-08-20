@@ -7,10 +7,14 @@ import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.ReviewNotes;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
 public class TransformationNotes implements IETLTransformation<ReviewNotes, FNotes> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationNotes.class.getName());
 
     @Inject
     public Helper helper;

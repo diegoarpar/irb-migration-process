@@ -5,12 +5,16 @@ import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TransformationApplication implements IETLTransformation<IrbApplications, FApplicationFormBasic> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationApplication.class.getName());
 
     public List<IrbApplications> TransformData(List<FApplicationFormBasic> sourceData) {
 
@@ -39,6 +43,7 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
                 userProfiles.SecurityStamp =  helper.generateRandomStamp();
 
                 data[0].put(userProfiles.NormalizedEmail, userProfiles);
+                LOGGER.info("MIGRATION: New User " + source.gu_email);
             }
             application.UserId = userProfiles;
             application.Title = source.title_of_research;

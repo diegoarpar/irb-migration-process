@@ -1,14 +1,12 @@
 package com.irb.migration.service.transforms;
 
-import com.google.common.base.Strings;
 import com.irb.migration.entity.from.FExpedited;
-import com.irb.migration.entity.from.FIssues;
-import com.irb.migration.entity.to.AspNetUsers;
 import com.irb.migration.entity.to.IrbApplications;
-import com.irb.migration.entity.to.Issues;
 import com.irb.migration.entity.to.NonStandards;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -22,6 +20,7 @@ public class TransformationExpedited implements IETLTransformation<NonStandards,
     public List<NonStandards> TransformData(List<FExpedited> sourceData) {
         return List.of();
     }
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationExpedited.class.getName());
 
     @Override
     public List<NonStandards> TransformData(List<FExpedited> origin, Map... data) {
@@ -29,6 +28,7 @@ public class TransformationExpedited implements IETLTransformation<NonStandards,
 
             IrbApplications application = (IrbApplications) data[0].get(source.application_id.toUpperCase());
             if (application == null || !"expedited".equalsIgnoreCase(application.TypeOfReview)) {
+                LOGGER.error("MIGRATION: IRB does not exist when migrate expedited " + source.application_id);
                 return null;
             }
             NonStandards nonStandards = new NonStandards();

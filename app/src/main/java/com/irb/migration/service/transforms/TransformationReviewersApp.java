@@ -3,19 +3,21 @@ package com.irb.migration.service.transforms;
 import com.google.common.base.Strings;
 import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.to.AspNetUsers;
-import com.irb.migration.entity.to.FacultySponsors;
 import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.Reviewers;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
-
-import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TransformationReviewersApp implements IETLTransformation<Reviewers, FApplicationFormBasic> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationReviewersApp.class.getName());
+
 
     @Inject
     public Helper helper;

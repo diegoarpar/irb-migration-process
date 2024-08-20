@@ -5,6 +5,8 @@ import com.irb.migration.entity.from.FCoinvestigator;
 import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +20,7 @@ public class TransformationCoInvestigator implements IETLTransformation<CoInvest
     public List<CoInvestigators> TransformData(List<FCoinvestigator> sourceData) {
         return List.of();
     }
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationCoInvestigator.class.getName());
 
     @Override
     public List<CoInvestigators> TransformData(List<FCoinvestigator> origin, Map... data) {
@@ -140,6 +143,7 @@ public class TransformationCoInvestigator implements IETLTransformation<CoInvest
         CoInvestigators coInvestigators = new CoInvestigators();
         coInvestigators.IrbApplicationId = (IrbApplications) apps.get(application_id);
         if (coInvestigators.IrbApplicationId == null) {
+            LOGGER.error("MIGRATION: IRB does not exist when migrate co-investigators " + application_id);
             return  null;
         }
         AspNetUsers coInvestigatorUser = (AspNetUsers) users.get(coinvestiEmail1.toUpperCase());
@@ -157,7 +161,7 @@ public class TransformationCoInvestigator implements IETLTransformation<CoInvest
             coInvestigatorUser.PhoneNumberConfirmed = Strings.isNullOrEmpty(coinvestiPhone1)? 0: 1 ;
             coInvestigatorUser.EmailConfirmed = Strings.isNullOrEmpty(coinvestiEmail1)? 0: 1 ;
             coInvestigatorUser.SecurityStamp =  helper.generateRandomStamp();
-
+            LOGGER.info("MIGRATION: Creating new user when migrate co-investigators " + coInvestigatorUser.Email);
             users.put(coInvestigatorUser.NormalizedEmail, coInvestigatorUser);
         }
         coInvestigators.IrbUserId = coInvestigatorUser;

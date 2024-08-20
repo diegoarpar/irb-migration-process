@@ -6,6 +6,8 @@ import com.irb.migration.entity.to.Documents;
 import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -16,6 +18,7 @@ public class TransformationDocuments implements IETLTransformation<Documents, FD
     public List<Documents> TransformData(List<FDocuments> sourceData) {
         return List.of();
     }
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationDocuments.class.getName());
 
     @Override
     public List<Documents> TransformData(List<FDocuments> origin, Map... data) {
@@ -23,6 +26,7 @@ public class TransformationDocuments implements IETLTransformation<Documents, FD
         for (FDocuments fDoc : origin) {
             IrbApplications application = (IrbApplications) data[1].get(fDoc.application_id.toUpperCase());
             if (application == null) {
+                LOGGER.error("MIGRATION: IRB does not exist when migrate documents " + fDoc.application_id);
                 continue;
             }
 

@@ -1,19 +1,22 @@
 package com.irb.migration.service.transforms;
 
 import com.google.common.base.Strings;
-import com.irb.migration.entity.from.FDataHandling;
 import com.irb.migration.entity.from.FNotificationForm;
 import com.irb.migration.entity.to.AspNetUsers;
-import com.irb.migration.entity.to.DataHandling;
 import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.NotificationForms;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class TransformationNotificationForms implements IETLTransformation<NotificationForms, FNotificationForm> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationNotificationForms.class.getName());
+
 
     @Inject
     public Helper helper;

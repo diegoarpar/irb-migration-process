@@ -1,12 +1,12 @@
 package com.irb.migration.service.transforms;
 
 import com.irb.migration.entity.from.FChangeUserType;
-import com.irb.migration.entity.from.FEmailNotification;
 import com.irb.migration.entity.to.AspNetUsers;
-import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.TransactionLogs;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +14,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TransformationTransactionLogsChangeUser implements IETLTransformation<TransactionLogs, FChangeUserType> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationTransactionLogsChangeUser.class.getName());
+
 
     @Inject
     public Helper helper;

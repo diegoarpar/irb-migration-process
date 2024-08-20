@@ -7,6 +7,8 @@ import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.StandardVotes;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -14,6 +16,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TransformationVote implements IETLTransformation<StandardVotes, FStandardDecision> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationVote.class.getName());
+
 
     @Inject
     public Helper helper;

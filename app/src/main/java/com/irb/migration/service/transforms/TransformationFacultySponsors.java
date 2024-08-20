@@ -5,6 +5,8 @@ import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,7 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
     public List<FacultySponsors> TransformData(List<FApplicationFormBasic> sourceData) {
         return List.of();
     }
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationDocuments.class.getName());
 
     @Override
     public List<FacultySponsors> TransformData(List<FApplicationFormBasic> origin, Map... data) {
@@ -32,6 +35,7 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
             IrbApplications application = (IrbApplications) data[1].get(source.application_id.toUpperCase());
             AspNetUsers sponsor = (AspNetUsers) data[0].get(source.email.toUpperCase());
             if (application == null) {
+                LOGGER.error("MIGRATION: IRB does not exist when migrate sponsor " + source.application_id);
                 return null;
             }
             if (sponsor == null) {
@@ -47,6 +51,7 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
                 sponsor.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.telephone)? 0:1;
                 sponsor.PhoneNumber = source.telephone;
                 sponsor.SecurityStamp =  helper.generateRandomStamp();
+                LOGGER.info("MIGRATION: IRB creating new user " + sponsor.Email);
                 data[0].put(sponsor.NormalizedEmail, sponsor);
             }
 

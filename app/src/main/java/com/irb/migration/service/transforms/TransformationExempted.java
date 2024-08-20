@@ -1,11 +1,12 @@
 package com.irb.migration.service.transforms;
 
 import com.irb.migration.entity.from.FExempted;
-import com.irb.migration.entity.from.FExpedited;
 import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.NonStandards;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ public class TransformationExempted implements IETLTransformation<NonStandards, 
     public List<NonStandards> TransformData(List<FExempted> sourceData) {
         return List.of();
     }
+    private static final Logger LOGGER = LoggerFactory.getLogger(IETLTransformation.class.getName());
+
 
     @Override
     public List<NonStandards> TransformData(List<FExempted> origin, Map... data) {
@@ -26,6 +29,7 @@ public class TransformationExempted implements IETLTransformation<NonStandards, 
 
             IrbApplications application = (IrbApplications) data[0].get(source.application_id.toUpperCase());
             if (application == null || !"Exempted".equalsIgnoreCase(application.TypeOfReview)) {
+                LOGGER.error("MIGRATION: IRB does not exist when migrate exempted " + source.application_id);
                 return null;
             }
             NonStandards nonStandards = new NonStandards();

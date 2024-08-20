@@ -5,6 +5,8 @@ import com.irb.migration.entity.from.FDataHandling;
 import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -19,6 +21,7 @@ public class TransformationDataHandling implements IETLTransformation<DataHandli
     public List<DataHandling> TransformData(List<FDataHandling> sourceData) {
         return List.of();
     }
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationDataHandling.class.getName());
 
     @Override
     public List<DataHandling> TransformData(List<FDataHandling> origin, Map... data) {
@@ -26,6 +29,7 @@ public class TransformationDataHandling implements IETLTransformation<DataHandli
 
             IrbApplications application = (IrbApplications) data[1].get(source.application_id.toUpperCase());
             if (application == null) {
+                LOGGER.error("MIGRATION: IRB does not exist when migrate data-handling " + source.application_id);
                 return null;
             }
             DataHandling dataHandling = new DataHandling();

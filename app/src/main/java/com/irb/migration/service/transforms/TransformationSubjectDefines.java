@@ -1,13 +1,13 @@
 package com.irb.migration.service.transforms;
 
 import com.google.common.base.Strings;
-import com.irb.migration.entity.from.FDataHandling;
 import com.irb.migration.entity.from.FSubjectDef;
-import com.irb.migration.entity.to.DataHandling;
 import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.SubjectDefines;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +16,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TransformationSubjectDefines implements IETLTransformation<SubjectDefines, FSubjectDef> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationSubjectDefines.class.getName());
+
 
     @Inject
     public Helper helper;
@@ -29,6 +32,7 @@ public class TransformationSubjectDefines implements IETLTransformation<SubjectD
 
             IrbApplications application = (IrbApplications) data[1].get(source.application_id.toUpperCase());
             if (application == null) {
+                LOGGER.error("MIGRATION: IRB does not exist when migrate subject def " + source.application_id);
                 return null;
             }
             SubjectDefines subjectDefines = new SubjectDefines();

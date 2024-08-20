@@ -2,12 +2,12 @@ package com.irb.migration.service.transforms;
 
 import com.google.common.base.Strings;
 import com.irb.migration.entity.from.FResearchStudy;
-import com.irb.migration.entity.from.FSubjectDef;
 import com.irb.migration.entity.to.IrbApplications;
 import com.irb.migration.entity.to.ResearchStudies;
-import com.irb.migration.entity.to.SubjectDefines;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -16,6 +16,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class TransformationResearchStudy implements IETLTransformation<ResearchStudies, FResearchStudy> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationResearchStudy.class.getName());
+
 
     @Inject
     public Helper helper;
@@ -29,6 +32,7 @@ public class TransformationResearchStudy implements IETLTransformation<ResearchS
 
             IrbApplications application = (IrbApplications) data[1].get(source.application_id.toUpperCase());
             if (application == null) {
+                LOGGER.error("MIGRATION: IRB does not exist when migrate research study " + source.application_id);
                 return null;
             }
             ResearchStudies researchStudies = new ResearchStudies();

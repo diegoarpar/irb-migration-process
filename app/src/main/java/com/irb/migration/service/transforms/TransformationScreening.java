@@ -5,12 +5,17 @@ import com.irb.migration.entity.to.AspNetUsers;
 import com.irb.migration.entity.to.Screenings;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TransformationScreening implements IETLTransformation<Screenings, FScreening> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationScreening.class.getName());
+
 
     @Inject
     public Helper helper;
