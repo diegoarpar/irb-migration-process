@@ -28,7 +28,7 @@ public class TransformationExpedited implements IETLTransformation<NonStandards,
 
             IrbApplications application = (IrbApplications) data[0].get(source.application_id.toUpperCase());
             if (application == null || !"expedited".equalsIgnoreCase(application.TypeOfReview)) {
-                LOGGER.error("MIGRATION: IRB does not exist when migrate expedited " + source.application_id);
+                LOGGER.error("MIGRATION: IRB does not exist when migrate expedited " + source.application_id + " " + (application != null? application.TypeOfReview: ""));
                 return null;
             }
             NonStandards nonStandards = new NonStandards();

@@ -27,41 +27,10 @@ public class TransformationUserProfiles implements IETLTransformation<UserProfil
         universities.Name = "Gannon University";
         universities.CreatedDate = new Date();
         return sourceData.stream().map(source -> {
-
-            AspNetUsers aspNetUsers = new AspNetUsers();
-            aspNetUsers.NormalizedEmail = source.gu_email.toUpperCase();
-            aspNetUsers.Email = source.gu_email;
-            aspNetUsers.EmailConfirmed = "1".equalsIgnoreCase(source.admin_approval)? 1: 0 ;
-            aspNetUsers.UserName = source.gu_email;
-            aspNetUsers.PhoneNumber = source.contact_no;
-            aspNetUsers.TwoFactorEnabled = 0;
-            aspNetUsers.LockoutEnabled = 1;
-            aspNetUsers.AccessFailedCount = 0;
-            aspNetUsers.NormalizedUserName = source.gu_email.toUpperCase();
-            aspNetUsers.SecurityStamp =  helper.generateRandomStamp();
-            aspNetUsers.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.contact_no)? 0: 1 ;
-
-            UserProfiles userProfileUser = new UserProfiles();
-            userProfileUser.UserId = aspNetUsers;
-            userProfileUser.FirstName  = source.firstname;
-            userProfileUser.LastName = source.last_name;
-            userProfileUser.MiddleName = source.middle_name;
-            userProfileUser.Title = source.title;
-            userProfileUser.Picture = source.img;
-            userProfileUser.CreatedDate = source.reg_date;
-            userProfileUser.LastLogin = helper.toDate(source.last_visit);
-            userProfileUser.University = universities;
-            userProfileUser.Campus = source.campus;
-            userProfileUser.Department = source.department;
-            userProfileUser.ResearchArea = source.research_area;
-            userProfileUser.Gender = source.gender;
-            userProfileUser.Role = getRoles(source.user_type, source.IsUserAdmin, source.HasAdminPrivilages);
-            userProfileUser.CreatedDate = new Date();
-
-
-
-
-            return userProfileUser;
+            return helper.getUserProfile(source.gu_email, source.contact_no, source.firstname,
+                    source.last_name, source.middle_name, source.title, source.img, source.reg_date,
+                    source.last_visit, source.campus, source.department, source.research_area,
+                    source.gender, source.admin_approval , source.user_type, source.IsUserAdmin, source.HasAdminPrivilages, "", universities);
         }).collect(Collectors.toList());
     }
 
@@ -70,25 +39,5 @@ public class TransformationUserProfiles implements IETLTransformation<UserProfil
         return List.of();
     }
 
-    private String getRoles(String userType, String isUserAdmin, String hasAdminPrivilages) {
-        String role = "";
-        if (!Strings.isNullOrEmpty(userType)) {
-            role = switch (userType) {
-                case "Student" -> "student";
-                case "IRB Staff" -> "irbmember";
-                case "GU Staff" -> "irbchair";
-                case "Faculty" -> "faculty";
-                case "Admin" -> "irbchair,admin";
-                default -> role;
-            };
-            if ("yes".equalsIgnoreCase(isUserAdmin) || "yes".equalsIgnoreCase(hasAdminPrivilages)) {
-                if (!Strings.isNullOrEmpty(role) && !role.contains("admin")) {
-                    role = String.format("%s,%s", role, "admin");
-                } else {
-                    role = "irbchair,admin";
-                }
-            }
-        }
-        return role;
-    }
+
 }

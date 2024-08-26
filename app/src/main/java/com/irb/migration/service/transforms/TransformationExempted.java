@@ -20,7 +20,7 @@ public class TransformationExempted implements IETLTransformation<NonStandards, 
     public List<NonStandards> TransformData(List<FExempted> sourceData) {
         return List.of();
     }
-    private static final Logger LOGGER = LoggerFactory.getLogger(IETLTransformation.class.getName());
+    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationExempted.class.getName());
 
 
     @Override
@@ -29,7 +29,7 @@ public class TransformationExempted implements IETLTransformation<NonStandards, 
 
             IrbApplications application = (IrbApplications) data[0].get(source.application_id.toUpperCase());
             if (application == null || !"Exempted".equalsIgnoreCase(application.TypeOfReview)) {
-                LOGGER.error("MIGRATION: IRB does not exist when migrate exempted " + source.application_id);
+                LOGGER.error("MIGRATION: IRB does not exist when migrate exempted " + source.application_id + " " + (application != null? application.TypeOfReview: ""));
                 return null;
             }
             NonStandards nonStandards = new NonStandards();

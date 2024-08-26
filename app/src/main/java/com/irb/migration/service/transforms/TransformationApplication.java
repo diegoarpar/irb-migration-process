@@ -8,6 +8,7 @@ import jakarta.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -25,27 +26,29 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
     public Helper helper;
     @Override
     public List<IrbApplications> TransformData(List<FApplicationFormBasic> origin, Map... data) {
+
         return origin.stream().map(source -> {
             IrbApplications  application = new IrbApplications();
-            AspNetUsers userProfiles = (AspNetUsers) data[0].get(source.gu_email.toUpperCase());
+            UserProfiles userProfiles = (UserProfiles) data[0].get(source.gu_email.toUpperCase());
+            Universities universities = (Universities) data[1].get("gannon");
             if (userProfiles == null) {
-                userProfiles = new AspNetUsers();
-                userProfiles.UserName = source.gu_email;
-                userProfiles.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.telephone)? 0 : 1;
-                userProfiles.PhoneNumber = source.telephone;
-                userProfiles.Email = source.gu_email;
-                userProfiles.EmailConfirmed = 1;
-                userProfiles.NormalizedEmail = source.gu_email.toUpperCase();
-                userProfiles.NormalizedUserName = source.gu_email.toUpperCase();
-                userProfiles.AccessFailedCount = 0;
-                userProfiles.LockoutEnabled = 1;
-                userProfiles.TwoFactorEnabled = 0;
-                userProfiles.SecurityStamp =  helper.generateRandomStamp();
+                userProfiles = helper.getUserProfile(source.gu_email, source.telephone, source.principalinvestigator, "",
+                        "", "", "", helper.toDateSlash(source.date_of_submission),
+                        "", "", "", "", "", "yes", source.status, "no", "no",
+                        source.investigator_mail_add, universities);
 
-                data[0].put(userProfiles.NormalizedEmail, userProfiles);
+                data[0].put(userProfiles.UserId.NormalizedEmail, userProfiles);
                 LOGGER.info("MIGRATION: New User " + source.gu_email);
             }
-            application.UserId = userProfiles;
+            application.UserId = userProfiles.UserId;
+            if (Strings.isNullOrEmpty(userProfiles.Address) && !Strings.isNullOrEmpty(source.investigator_mail_add)) {
+                userProfiles.Address = source.investigator_mail_add;
+            }
+
+            if (Strings.isNullOrEmpty(userProfiles.UserId.PhoneNumber) && !Strings.isNullOrEmpty(source.telephone)) {
+                userProfiles.UserId.PhoneNumber = source.telephone;
+            }
+
             application.Title = source.title_of_research;
             application.Description = source.description;
             application.TypeOfReview = getTypeOfReview(source.typeofreview);

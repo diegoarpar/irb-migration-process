@@ -33,35 +33,28 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
                 return null;
             }
             IrbApplications application = (IrbApplications) data[1].get(source.application_id.toUpperCase());
-            AspNetUsers sponsor = (AspNetUsers) data[0].get(source.email.toUpperCase());
+            Universities universities = (Universities) data[2].get("gannon");
+            UserProfiles sponsor = (UserProfiles) data[0].get(source.email.toUpperCase());
             if (application == null) {
                 LOGGER.error("MIGRATION: IRB does not exist when migrate sponsor " + source.application_id);
                 return null;
             }
             if (sponsor == null) {
-                sponsor = new AspNetUsers();
-                sponsor.NormalizedEmail  = source.email.toUpperCase();
-                sponsor.NormalizedUserName = source.email.toUpperCase();
-                sponsor.Email = source.email;
-                sponsor.TwoFactorEnabled = 0;
-                sponsor.UserName = source.email;
-                sponsor.AccessFailedCount = 0;
-                sponsor.EmailConfirmed = 1;
-                sponsor.LockoutEnabled = 1;
-                sponsor.PhoneNumberConfirmed = Strings.isNullOrEmpty(source.telephone)? 0:1;
-                sponsor.PhoneNumber = source.telephone;
-                sponsor.SecurityStamp =  helper.generateRandomStamp();
-                LOGGER.info("MIGRATION: IRB creating new user " + sponsor.Email);
-                data[0].put(sponsor.NormalizedEmail, sponsor);
+                sponsor = helper.getUserProfile(source.email, source.telephone, source.faculty_sponsor_sign, "", "",
+                        "", "", application.SubmittedDate, "", "", "",
+                        "", "", "no", "Faculty", "no", "no"
+                        , source.faculty_sponsor_office, universities);
+                LOGGER.info("MIGRATION: IRB creating new user " + sponsor.UserId.Email);
+                data[0].put(sponsor.UserId.NormalizedEmail, sponsor);
             }
 
             FacultySponsors facultySponsors = new FacultySponsors();
 
             facultySponsors.IrbApplicationId = application;
-            facultySponsors.UserId = sponsor;
+            facultySponsors.UserId = sponsor.UserId;
             facultySponsors.SponsorDegree = source.sponsor_name_degree;
             facultySponsors.Email = source.email;
-            facultySponsors.Fullname = String.format("%s %s", sponsor.NormalizedEmail, sponsor.NormalizedEmail);
+            facultySponsors.Fullname = String.format("%s %s", sponsor.FirstName, sponsor.UserId.NormalizedEmail);
             facultySponsors.ReseachDescription = source.description;
             facultySponsors.Address = source.faculty_sponsor_office;
             facultySponsors.Signature = source.faculty_sponsor_sign;

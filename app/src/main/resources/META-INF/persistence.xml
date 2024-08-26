@@ -29,7 +29,7 @@
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="validate"/>
-            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
         </properties>
     </persistence-unit>
 
@@ -62,7 +62,7 @@
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
         </properties>
     </persistence-unit>
 
@@ -95,7 +95,7 @@
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.show_sql" value="false"/>
         </properties>
     </persistence-unit>
 </persistence>
