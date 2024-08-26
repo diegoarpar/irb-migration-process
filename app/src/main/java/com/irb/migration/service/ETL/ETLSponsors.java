@@ -35,7 +35,7 @@ public class ETLSponsors implements IETL{
         Map<String, UserProfiles> usersMap = users.stream().collect(Collectors.toMap(aspNetUsers -> aspNetUsers.UserId.NormalizedEmail , aspNetUsers -> aspNetUsers));
         Map<String, IrbApplications> applicatinosMap = applications.stream().collect(Collectors.toMap(application -> application.ApplicationCode, application -> application));
         List<Universities> universities = destEM.createQuery("SELECT s FROM Universities s", Universities.class).getResultList();
-        Map<String, Universities> univerisityMap = Collections.singletonMap("gannon", universities.getFirst());
+        Map<String, Universities> univerisityMap = Collections.singletonMap("gannon", universities.get(0));
 
         applications = null;
         users = null;

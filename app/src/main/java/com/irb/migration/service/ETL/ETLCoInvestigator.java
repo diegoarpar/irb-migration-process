@@ -33,7 +33,7 @@ public class ETLCoInvestigator implements IETL{
         List<UserProfiles> users = destEM.createQuery("SELECT s FROM UserProfiles s", UserProfiles.class).getResultList();
         List<IrbApplications> applications = destEM.createQuery("SELECT s FROM IrbApplications s", IrbApplications.class).getResultList();
         List<Universities> universities = destEM.createQuery("SELECT s FROM Universities s", Universities.class).getResultList();
-        Map<String, Universities> univerisityMap = Collections.singletonMap("gannon", universities.getFirst());
+        Map<String, Universities> univerisityMap = Collections.singletonMap("gannon", universities.get(0));
 
         Map<String, UserProfiles> usersMap = users.stream().collect(Collectors.toMap(aspNetUsers -> aspNetUsers.UserId.NormalizedEmail , aspNetUsers -> aspNetUsers));
         Map<String, IrbApplications> applicatinosMap = applications.stream().collect(Collectors.toMap(application -> application.ApplicationCode, application -> application));

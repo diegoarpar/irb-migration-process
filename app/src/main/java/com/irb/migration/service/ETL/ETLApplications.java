@@ -34,7 +34,7 @@ public class ETLApplications implements IETL{
         List<FApplicationFormBasic> sourceData = sourceEM.createQuery("SELECT s FROM FApplicationFormBasic s", FApplicationFormBasic.class).getResultList();
         List<UserProfiles> users = destEM.createQuery("SELECT s FROM UserProfiles s", UserProfiles.class).getResultList();
         List<Universities> universities = destEM.createQuery("SELECT s FROM Universities s", Universities.class).getResultList();
-        Map<String, Universities> univerisityMap = Collections.singletonMap("gannon", universities.getFirst());
+        Map<String, Universities> univerisityMap = Collections.singletonMap("gannon", universities.get(0));
         Map<String, UserProfiles> usersMap = users.stream().collect(Collectors.toMap(aspNetUsers -> aspNetUsers.UserId.NormalizedEmail, aspNetUsers -> aspNetUsers));
         users = null;
         // Transform data
