@@ -14,7 +14,7 @@ public class App {
     public static void main(String[] args) {
         System.setProperty("eclipselink.ddl-generation", "update");
         IETL etl = Guice.createInjector().getInstance(ETLUsers.class);
-        /*etl.StartETL();
+        etl.StartETL();
 
         etl = Guice.createInjector().getInstance(ETLUserClaims.class);
         etl.StartETL();
@@ -28,7 +28,6 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLSponsors.class);
         etl.StartETL();
 
-        */
         etl = Guice.createInjector().getInstance(ETLScreening.class);
         etl.StartETL();
 
