@@ -51,7 +51,8 @@ public class TransformationRiskFactors implements IETLTransformation<RiskFactors
             riskFactors.Field44 = source.field44;
             riskFactors.GeneralKnowledge = String.format("%s %s", source.contri_to_gk, source.sub_rewarded_compen);
             riskFactors.IncludeSomething = 0;
-
+            riskFactors.InvolvedResearch = getInvolvedResearch();
+            riskFactors.PossibleBenefit = source.possible_benefits + " " + source.contri_to_gk;
 
             riskFactors.CreatedDate = application.SubmittedDate != null? application.SubmittedDate: new Date();
             riskFactors.UpdatedDate = riskFactors.CreatedDate;
@@ -61,7 +62,9 @@ public class TransformationRiskFactors implements IETLTransformation<RiskFactors
 
     }
 
-
+    private String getInvolvedResearch() {
+        return "1|Any surgical procedure|False, 2|Administration of approved/unapproved drugs / chemical or biological agents|False, 3|Only administration of legend drugs|False, 4|Administration of approved/unapproved devices|False, 5|Radioisotopes or other sources of ionizing radiation Placebos|False, 6|Controlled Substances|False, 7|Recombinant DNA|False, 8|Human Gene Transfer|False, 9|Biological Toxins|False, 10|Infectious Agents|False, 11|Embryonic stem cells|False, 12|Administration of physical stimuli Major changes in diet / exercise or sleep Blood Draw|False, 13|Use of private records|False, 14|Possible invasion of privacy of subject or family|False, 15|Manipulation of psychological or social variables|False, 16|Any probing for personal or sensitive information in surveys or interviews|False, 17|Presentation of materials which subjects might consider sensitive / offensive / threatening or degrading|False, 18|Use of a deceptive technique|False, 19|Other risks(specify)|False, 20|None of the above|False";
+    }
 
 
 }
