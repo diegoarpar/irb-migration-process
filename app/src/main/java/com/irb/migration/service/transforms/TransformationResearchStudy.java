@@ -53,7 +53,7 @@ public class TransformationResearchStudy implements IETLTransformation<ResearchS
             researchStudies.IsUtilizeAcademicRecord = 0;
             researchStudies.IsAnyIntervention = 0;
             researchStudies.Procedure = "";
-            researchStudies.IsRequiredGrant = !Strings.isNullOrEmpty(source.research_std_proposal) && source.research_std_proposal.contains("grant")? 1: 0;
+            researchStudies.IsRequiredGrant = !Strings.isNullOrEmpty(source.research_std_proposal) && source.research_std_proposal.toLowerCase().contains("grant")? 1: 0;
             researchStudies.ResearchProposals = getProposal(source.research_std_proposal);
 
 
@@ -84,7 +84,7 @@ public class TransformationResearchStudy implements IETLTransformation<ResearchS
         if (Strings.isNullOrEmpty(typeOfConsent)) {
             return "False";
         }
-        return typeOfConsent.contains(word) ? "True" : "False";
+        return typeOfConsent.toLowerCase().contains(word.toLowerCase()) ? "True" : "False";
     }
 
 }

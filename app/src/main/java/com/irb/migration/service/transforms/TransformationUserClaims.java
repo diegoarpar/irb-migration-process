@@ -51,7 +51,7 @@ public class TransformationUserClaims implements IETLTransformation<AspNetUserCl
                 default -> role;
             };
             if ("yes".equalsIgnoreCase(isUserAdmin) || "yes".equalsIgnoreCase(hasAdminPrivilages)) {
-                if (!Strings.isNullOrEmpty(role) && !role.contains("admin")) {
+                if (!Strings.isNullOrEmpty(role) && !role.toLowerCase().contains("admin")) {
                     role = String.format("%s,%s", role, "admin");
                 } else {
                     role = "irbchair,admin";

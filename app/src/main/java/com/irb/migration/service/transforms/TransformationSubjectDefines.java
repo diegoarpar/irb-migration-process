@@ -47,7 +47,7 @@ public class TransformationSubjectDefines implements IETLTransformation<SubjectD
             subjectDefines.SubRecruitedTypes = getSubRecrutType(source.sub_recruited);
             subjectDefines.SubRecruitedOther = source.sub_recruited_other;
             subjectDefines.isAvailableEveryOne = 0;
-            subjectDefines.isIncludeGannonStudents = source.research_sub_population != null && source.research_sub_population.contains("Students")? 1: 0;
+            subjectDefines.isIncludeGannonStudents = source.research_sub_population != null && source.research_sub_population.toLowerCase().contains("students")? 1: 0;
             subjectDefines.isInformationIdentifiable = 0;
 
 
@@ -93,7 +93,7 @@ public class TransformationSubjectDefines implements IETLTransformation<SubjectD
         if (Strings.isNullOrEmpty(typeOfConsent)) {
             return "False";
         }
-        return typeOfConsent.contains(word) ? "True" : "False";
+        return typeOfConsent.toLowerCase().contains(word.toLowerCase()) ? "True" : "False";
     }
 
 }

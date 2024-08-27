@@ -106,7 +106,7 @@ public class TransformationInformedConsent implements IETLTransformation<Informe
         if (Strings.isNullOrEmpty(typeOfConsent)) {
             return "False";
         }
-        return typeOfConsent.contains(word) ? "True" : "False";
+        return typeOfConsent.toLowerCase().contains(word.toLowerCase()) ? "True" : "False";
     }
 
 

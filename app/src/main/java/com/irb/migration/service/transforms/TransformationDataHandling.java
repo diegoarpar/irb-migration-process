@@ -77,7 +77,7 @@ public class TransformationDataHandling implements IETLTransformation<DataHandli
         if (Strings.isNullOrEmpty(typeOfConsent)) {
             return "False";
         }
-        return typeOfConsent.contains(word) ? "True" : "False";
+        return typeOfConsent.toLowerCase().contains(word.toLowerCase()) ? "True" : "False";
     }
 
 

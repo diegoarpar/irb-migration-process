@@ -118,11 +118,11 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
 
         }
 
-        if (typeofreview.contains("Expedited")) {
+        if (typeofreview.toLowerCase().contains("expedited")) {
             return "Expedited";
 
         }
-        if (typeofreview.contains("Standard")) {
+        if (typeofreview.toLowerCase().contains("standard")) {
             return "Standard";
 
         }
