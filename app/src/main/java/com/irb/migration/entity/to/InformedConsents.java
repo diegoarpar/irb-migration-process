@@ -25,6 +25,7 @@ public class InformedConsents {
     @Column(name = "ConsentType")
     public String ConsentType;
 
+    @Lob
     @Column(name = "FormDistribution")
     public String FormDistribution;
 

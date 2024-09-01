@@ -28,6 +28,9 @@ public class ResearchStudies {
     @Column(name = "FundingAgency")
     public String FundingAgency;
 
+    @Column(name = "AgencyOther")
+    public String agencyOther;
+
     @Column(name = "IsApprovalRequired")
     public Integer IsApprovalRequired;
 

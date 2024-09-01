@@ -2,6 +2,7 @@ package com.irb.migration.service.ETL;
 
 import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.to.IrbApplications;
+import com.irb.migration.entity.to.TransactionLogs;
 import com.irb.migration.entity.to.Universities;
 import com.irb.migration.entity.to.UserProfiles;
 import com.irb.migration.service.transforms.ELTFactoryTransformation;

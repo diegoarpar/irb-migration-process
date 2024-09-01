@@ -40,6 +40,16 @@ public class TransformationResearchStudy implements IETLTransformation<ResearchS
             researchStudies.IrbApplicationId = application;
             researchStudies.UserId = application.UserId;
             researchStudies.FundingAgency = source.fund_agency;
+
+            if (!"n/a".equalsIgnoreCase(source.fund_agency) && !Strings.isNullOrEmpty(source.fund_agency) && source.fund_agency.trim().length() > 3) {
+                researchStudies.AgencyType = "External Agency";
+                researchStudies.Agency = "Others";
+                researchStudies.AgencyOther = source.fund_agency;
+            } else {
+                researchStudies.AgencyType = "Not Funded Research";
+                researchStudies.Agency = "";
+            }
+
             researchStudies.IsApprovalRequired = helper.fromYesNoToInt(source.irb_appvr_req);
             researchStudies.StartDate = helper.toDateMinus(source.data_start_day);
             researchStudies.StartDate = Objects.isNull(researchStudies.StartDate)? new Date():  researchStudies.StartDate;
@@ -50,6 +60,7 @@ public class TransformationResearchStudy implements IETLTransformation<ResearchS
             researchStudies.Method = source.methodology;
             researchStudies.HasConflict = 0;
             researchStudies.IsReviewed = 0;
+            researchStudies.agencyOther = "";
             researchStudies.IsUtilizeAcademicRecord = 0;
             researchStudies.IsAnyIntervention = 0;
             researchStudies.Procedure = "";

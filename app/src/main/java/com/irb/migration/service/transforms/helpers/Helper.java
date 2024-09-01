@@ -122,4 +122,15 @@ public class Helper {
         }
         return role;
     }
+
+    public String contains(String word, String typeOfConsent) {
+        if (Strings.isNullOrEmpty(typeOfConsent)) {
+            return "False";
+        }
+        return typeOfConsent.toLowerCase().contains(word.toLowerCase()) ? "True" : "False";
+    }
+
+    public String trueFalseFromYes(String word) {
+        return "yes".equalsIgnoreCase(word)? "True": "False";
+    }
 }

@@ -53,6 +53,7 @@
         <class>com.irb.migration.entity.to.ReviewNotes</class>
         <class>com.irb.migration.entity.to.SubjectDefines</class>
         <class>com.irb.migration.entity.to.ResearchStudies</class>
+        <class>com.irb.migration.entity.to.Recruitments</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
@@ -84,6 +85,7 @@
         <class>com.irb.migration.entity.to.ReviewNotes</class>
         <class>com.irb.migration.entity.to.SubjectDefines</class>
         <class>com.irb.migration.entity.to.ResearchStudies</class>
+        <class>com.irb.migration.entity.to.Recruitments</class>
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
