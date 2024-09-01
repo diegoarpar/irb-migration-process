@@ -76,6 +76,9 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLResearchStudy.class);
         etl.StartETL();
 
+        etl = Guice.createInjector().getInstance(ETLRecruitments.class);
+        etl.StartETL();
+
         etl = null;
 
         System.out.println(new App().getGreeting());

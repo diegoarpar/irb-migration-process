@@ -45,6 +45,7 @@ public class TransformationRecruitment implements IETLTransformation<Recruitment
             recruitment.IrbApplicationId = application.Id;
             recruitment.UserId = application.UserId.Id;
             recruitment.WillSubjectsReceiveAnything = 0;
+            recruitment.WillAccessFromRecord = 0;
             recruitment.AreChosenFromRecord = 0;
             recruitment.HasAccess = 0;
             recruitment.HasIdentifiableInformation = 0;
@@ -57,7 +58,7 @@ public class TransformationRecruitment implements IETLTransformation<Recruitment
                 recruitment.Strategy = dataHandling.research_dissem_sub;
                 recruitment.HasAccess = "yes".equalsIgnoreCase(dataHandling.data_collect_identi)? 1: 0;
                 recruitment.HasIdentifiableInformation = "yes".equalsIgnoreCase(dataHandling.data_collect_identi)? 1: 0;
-                recruitment.AreChosenFromRecord = "archival".contains(dataHandling.data_collect_method.toLowerCase())? 1: 0;
+                recruitment.AreChosenFromRecord = "archival".contains(Strings.isNullOrEmpty(dataHandling.data_collect_method)? "": dataHandling.data_collect_method.toLowerCase())? 1: 0;
                 recruitment.ApprovedPerson = dataHandling.acc_person;
                 recruitment.IdentifiableInformation = dataHandling.sch_mthd_deidenti_data;
             }

@@ -85,7 +85,7 @@ public class TransformationTransactionLogsChangeUser implements IETLTransformati
             }
         }
 
-        Iterator<Map.Entry<String, StandardVotes>> standardVotesIterator = ((Map<String, StandardVotes>) data[1]).entrySet().iterator();
+        Iterator<Map.Entry<String, StandardVotes>> standardVotesIterator = ((Map<String, StandardVotes>) data[3]).entrySet().iterator();
 
         while (standardVotesIterator.hasNext()) {
             StandardVotes standardVotes = standardVotesIterator.next().getValue();

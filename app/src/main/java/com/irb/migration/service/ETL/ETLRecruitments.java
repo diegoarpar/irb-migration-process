@@ -14,6 +14,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -33,11 +34,13 @@ public class ETLRecruitments implements IETL{
 
         // Extract data from source
         List<FRiskFactor> sourceData = sourceEM.createQuery("SELECT s FROM FRiskFactor s", FRiskFactor.class).getResultList();
+        List<FDataHandling> dataHandling = sourceEM.createQuery("SELECT s FROM FDataHandling s", FDataHandling.class).getResultList();
         List<IrbApplications> applications = destEM.createQuery("SELECT s FROM IrbApplications s", IrbApplications.class).getResultList();
-        List<FDataHandling> dataHandling = destEM.createQuery("SELECT s FROM FDataHandling s", FDataHandling.class).getResultList();
 
         Map<String, IrbApplications> applicatinosMap = applications.stream().collect(Collectors.toMap(application -> application.ApplicationCode, application -> application));
-        Map<String, FDataHandling> dataHandlingMap = dataHandling.stream().filter(row -> !Strings.isNullOrEmpty(row.application_id)).collect(Collectors.toMap(row -> row.application_id.toUpperCase(), row -> row));
+        Map<String, FDataHandling> dataHandlingMap = dataHandling.stream().filter(row -> !Strings.isNullOrEmpty(row.application_id)).collect(Collectors.toMap(row -> row.application_id.toUpperCase(), row -> row, (row1, row2) -> {
+            return row2;
+        }));
         applications = null;
 
         // Transform data

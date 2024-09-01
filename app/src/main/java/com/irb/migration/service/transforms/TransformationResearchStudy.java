@@ -60,7 +60,7 @@ public class TransformationResearchStudy implements IETLTransformation<ResearchS
             researchStudies.Method = source.methodology;
             researchStudies.HasConflict = 0;
             researchStudies.IsReviewed = 0;
-            researchStudies.agencyOther = "";
+            researchStudies.AgencyOther = "";
             researchStudies.IsUtilizeAcademicRecord = 0;
             researchStudies.IsAnyIntervention = 0;
             researchStudies.Procedure = "";
