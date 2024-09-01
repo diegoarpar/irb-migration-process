@@ -47,11 +47,12 @@ public class TransformationRiskFactors implements IETLTransformation<RiskFactors
             riskFactors.SubjectCoercion = helper.fromYesNoToInt(source.coercion_sub);
             riskFactors.SubjectDeception = helper.fromYesNoToInt(source.sub_deception);
             riskFactors.CoercionDeceptionDetail = source.exp_dtl;
+            riskFactors.DegreeOfRisks = source.exp_dtl;
             riskFactors.Field43 = source.field43;
             riskFactors.Field44 = source.field44;
             riskFactors.GeneralKnowledge = String.format("%s %s", source.contri_to_gk, source.sub_rewarded_compen);
             riskFactors.IncludeSomething = 0;
-            riskFactors.InvolvedResearch = getInvolvedResearch();
+            riskFactors.InvolvedResearch = getInvolvedResearch(source);
             riskFactors.PossibleBenefit = source.possible_benefits + " " + source.contri_to_gk;
 
             riskFactors.CreatedDate = application.SubmittedDate != null? application.SubmittedDate: new Date();
@@ -62,8 +63,38 @@ public class TransformationRiskFactors implements IETLTransformation<RiskFactors
 
     }
 
-    private String getInvolvedResearch() {
-        return "1|Any surgical procedure|False, 2|Administration of approved/unapproved drugs / chemical or biological agents|False, 3|Only administration of legend drugs|False, 4|Administration of approved/unapproved devices|False, 5|Radioisotopes or other sources of ionizing radiation Placebos|False, 6|Controlled Substances|False, 7|Recombinant DNA|False, 8|Human Gene Transfer|False, 9|Biological Toxins|False, 10|Infectious Agents|False, 11|Embryonic stem cells|False, 12|Administration of physical stimuli Major changes in diet / exercise or sleep Blood Draw|False, 13|Use of private records|False, 14|Possible invasion of privacy of subject or family|False, 15|Manipulation of psychological or social variables|False, 16|Any probing for personal or sensitive information in surveys or interviews|False, 17|Presentation of materials which subjects might consider sensitive / offensive / threatening or degrading|False, 18|Use of a deceptive technique|False, 19|Other risks(specify)|False, 20|None of the above|False";
+    private String getInvolvedResearch(FRiskFactor risk) {
+        String consent = "1|Any surgical procedure|%s, 2|Administration of approved/unapproved drugs / chemical or biological agents|%s, 3|Only administration of legend drugs|%s, 4|Administration of approved/unapproved devices|%s, 5|Radioisotopes or other sources of ionizing radiation Placebos|%s, 6|Controlled Substances|%s, 7|Recombinant DNA|%s, 8|Human Gene Transfer|%s, 9|Biological Toxins|%s, 10|Infectious Agents|%s, 11|Embryonic stem cells|%s, 12|Administration of physical stimuli Major changes in diet / exercise or sleep Blood Draw|%s, 13|Use of private records|%s, 14|Possible invasion of privacy of subject or family|%s, 15|Manipulation of psychological or social variables|%s, 16|Any probing for personal or sensitive information in surveys or interviews|%s, 17|Presentation of materials which subjects might consider sensitive / offensive / threatening or degrading|%s, 18|Use of a deceptive technique|%s, 19|Other risks(specify)|%s, 20|None of the above|%s";
+        String anyRisk1 = "False";
+        String drugs2 = helper.trueFalseFromYes(risk.exp_drug);
+        String drugs3 = drugs2;
+        String devices4 = "False";
+        String ionization5 = helper.trueFalseFromYes(risk.elec_equip);
+        String controllledSubstance6 = "False";
+        String dna7 = "False";
+        String gene8 = "False";
+        String toxic9 = "False";
+        String agents10 = "False";
+        String embrionic11 = "False";
+        String physicalStimulation12 = helper.trueFalseFromYes(risk.sub_phys_discomfort);
+        String privateRecords13 = "False";
+        String familiyPrivaticty14 = "False";
+        String physicology15 = helper.trueFalseFromYes(risk.sub_mental_discomfort);
+        String interview16 = "False";
+        String sensiveMaterial17 = "False";
+        String deception18 = helper.trueFalseFromYes(risk.sub_deception);
+        String otherRisk19 = "False";
+        String none20 = "False";
+        String finalInfo = String.format("%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s%s", consent, anyRisk1, drugs2, drugs3, devices4, ionization5, controllledSubstance6
+                , dna7, gene8, toxic9, agents10, embrionic11, physicalStimulation12, privateRecords13,
+                familiyPrivaticty14, physicology15, interview16, sensiveMaterial17, deception18, otherRisk19, none20);
+
+        none20 = finalInfo.toLowerCase().contains("yes")? "No": "Yes";
+        anyRisk1 = finalInfo.toLowerCase().contains("yes")? "Yes": "No";
+        return String.format(consent, anyRisk1, drugs2, drugs3, devices4, ionization5, controllledSubstance6
+                , dna7, gene8, toxic9, agents10, embrionic11, physicalStimulation12, privateRecords13,
+                familiyPrivaticty14, physicology15, interview16, sensiveMaterial17, deception18, otherRisk19, none20
+                );
     }
 
 

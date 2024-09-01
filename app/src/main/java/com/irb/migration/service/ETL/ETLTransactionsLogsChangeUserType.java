@@ -2,9 +2,7 @@ package com.irb.migration.service.ETL;
 
 import com.irb.migration.entity.from.FChangeUserType;
 import com.irb.migration.entity.from.FEmailNotification;
-import com.irb.migration.entity.to.AspNetUsers;
-import com.irb.migration.entity.to.IrbApplications;
-import com.irb.migration.entity.to.TransactionLogs;
+import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.ELTFactoryTransformation;
 import jakarta.inject.Inject;
 import jakarta.persistence.EntityManager;
@@ -31,12 +29,18 @@ public class ETLTransactionsLogsChangeUserType implements IETL{
         // Extract data from source
         List<FChangeUserType> sourceData = sourceEM.createQuery("SELECT s FROM FChangeUserType s", FChangeUserType.class).getResultList();
         List<AspNetUsers> users = destEM.createQuery("SELECT s FROM AspNetUsers s", AspNetUsers.class).getResultList();
+        List<IrbApplications> irbApplications = destEM.createQuery("SELECT s FROM IrbApplications s", IrbApplications.class).getResultList();
+        List<StandardVotes> standardVotes = destEM.createQuery("SELECT s FROM StandardVotes s", StandardVotes.class).getResultList();
+        List<Reviewers> reviewers = destEM.createQuery("SELECT s FROM Reviewers s", Reviewers.class).getResultList();
 
         Map<String, AspNetUsers> usersMap = users.stream().collect(Collectors.toMap(data -> data.NormalizedEmail, data -> data));
+        Map<String, IrbApplications> applicationMap = irbApplications.stream().collect(Collectors.toMap(data -> data.ApplicationCode, data -> data));
+        Map<String, Reviewers> reviewerMap = reviewers.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
+        Map<String, StandardVotes> standardVotesMap = standardVotes.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
         users = null;
 
         // Transform data
-        List<TransactionLogs> transformedData = eltFactoryTransformation.getTransformation("changeuser").TransformData(sourceData, usersMap);
+        List<TransactionLogs> transformedData = eltFactoryTransformation.getTransformation("changeuser").TransformData(sourceData, usersMap, applicationMap, reviewerMap, standardVotesMap);
 
         // Load data into destination
         destEM.getTransaction().begin();

@@ -1,17 +1,13 @@
 package com.irb.migration.service.transforms;
 
 import com.irb.migration.entity.from.FChangeUserType;
-import com.irb.migration.entity.to.AspNetUsers;
-import com.irb.migration.entity.to.TransactionLogs;
+import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class TransformationTransactionLogsChangeUser implements IETLTransformation<TransactionLogs, FChangeUserType> {
 
@@ -26,19 +22,87 @@ public class TransformationTransactionLogsChangeUser implements IETLTransformati
 
     @Override
     public List<TransactionLogs> TransformData(List<FChangeUserType> origin, Map... data) {
-        return origin.stream().map(source -> {
+        List<TransactionLogs> logs = new ArrayList<>();
+        for (FChangeUserType source : origin) {
+            TransactionLogs log = new TransactionLogs();
+            AspNetUsers user = (AspNetUsers) data[0].get(source.gu_email != null ? source.gu_email.toUpperCase() : "");
+            log.IrbApplicationId = -1;
+            log.UserId = user != null && !Objects.isNull(user.Id) ? user.Id : "-1";
+            log.Action = "Change_User";
+            log.EventDate = helper.toDateSlash(source.request_date);
+            log.EventName = "Change_User";
+            log.Info = String.format("Name:%s %s, Role:%s, Requested Role:%s, New Role:%s, Decision:%s, User Comment:%s, Admin Comment:%s, Decision Date:%s"
+                    , source.firstname, source.lastname, source.original_usertype, source.requested_usertype, source.new_usertype, source.request_decision, source.user_comment, source.admin_comment, source.decision_date);
+            logs.add(log);
+        }
 
-            AspNetUsers user = (AspNetUsers) data[0].get(source.gu_email != null? source.gu_email.toUpperCase(): "");
-            TransactionLogs transactionLogs = new TransactionLogs();
-            transactionLogs.IrbApplicationId = -1;
-            transactionLogs.UserId = user != null && !Objects.isNull(user.Id)? user.Id: "-1";
-            transactionLogs.Action = "Change_User";
-            transactionLogs.EventDate = helper.toDateSlash(source.request_date);
-            transactionLogs.EventName = "Change_User";
-            transactionLogs.Info = String.format("Name:%s %s, Role:%s, Requested Role:%s, New Role:%s, Decision:%s, User Comment:%s, Admin Comment:%s, Decision Date:%s"
-                                                , source.firstname, source.lastname, source.original_usertype, source.requested_usertype, source.new_usertype, source.request_decision, source.user_comment, source.admin_comment, source.decision_date);
-            return transactionLogs;
-        }).collect(Collectors.toList());
+        Iterator<Map.Entry<String, IrbApplications>> applicationIterator = ((Map<String, IrbApplications>) data[1]).entrySet().iterator();
+
+        while (applicationIterator.hasNext()) {
+            IrbApplications application = applicationIterator.next().getValue();
+            TransactionLogs logSubmitted = new TransactionLogs();
+            logSubmitted.IrbApplicationId = application.Id;
+            logSubmitted.UserId = application.UserId.Id;
+            logSubmitted.Action = "Application Submitted";
+            logSubmitted.EventDate = application.SubmittedDate;
+            logSubmitted.EventName = "Application Submitted";
+            logSubmitted.Info = "Application Submitted";
+            if (logSubmitted.EventDate != null) {
+                logs.add(logSubmitted);
+            }
+        }
+
+        Iterator<Map.Entry<String, Reviewers>> reviewerIterator = ((Map<String, Reviewers>) data[2]).entrySet().iterator();
+
+        while (reviewerIterator.hasNext()) {
+            Reviewers reviewer = reviewerIterator.next().getValue();
+            TransactionLogs logReview = new TransactionLogs();
+            logReview.IrbApplicationId = reviewer.IrbApplicationId;
+            if (logReview.IrbApplicationId == null) {
+                logReview.IrbApplicationId = -1;
+            }
+            logReview.UserId = reviewer.UserId;
+            logReview.Action = "Review Application";
+            logReview.EventDate = reviewer.CreatedDate;
+            logReview.EventName = "Review Application";
+            logReview.Info = "Review Application " + reviewer.Status + " " + reviewer.Description + " " + reviewer.Signature;
+            if (logReview.EventDate != null) {
+                logs.add(logReview);
+            }
+
+            TransactionLogs logReviewDecision = new TransactionLogs();
+            logReviewDecision.IrbApplicationId = reviewer.IrbApplicationId;
+            if (logReviewDecision.IrbApplicationId == null) {
+                logReviewDecision.IrbApplicationId = -1;
+            }
+            logReviewDecision.UserId = reviewer.UserId;
+            logReviewDecision.Action = "Decision Application";
+            logReviewDecision.EventDate = reviewer.DecisionDate;
+            logReviewDecision.EventName = "Decision Application";
+            logReviewDecision.Info = "Decision Application " + reviewer.Status + " " + reviewer.Description + " " + reviewer.Signature;
+            if (logReviewDecision.EventDate != null) {
+                logs.add(logReviewDecision);
+            }
+        }
+
+        Iterator<Map.Entry<String, StandardVotes>> standardVotesIterator = ((Map<String, StandardVotes>) data[1]).entrySet().iterator();
+
+        while (standardVotesIterator.hasNext()) {
+            StandardVotes standardVotes = standardVotesIterator.next().getValue();
+            TransactionLogs logStandardVote = new TransactionLogs();
+            logStandardVote.IrbApplicationId = standardVotes.IrbApplicationId;
+            logStandardVote.UserId = standardVotes.UserId;
+            logStandardVote.Action = "Application Vote";
+            logStandardVote.EventDate = standardVotes.CreatedDate;
+            logStandardVote.EventName = "Application Vote";
+            logStandardVote.Info = "Application Vote " + standardVotes.Decision + " " + standardVotes.Reason;
+            if (logStandardVote.EventDate != null) {
+                logs.add(logStandardVote);
+            }
+        }
+
+        return logs;
+
     }
 
 

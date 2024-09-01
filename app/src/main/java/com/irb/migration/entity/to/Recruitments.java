@@ -1,0 +1,60 @@
+package com.irb.migration.entity.to;
+
+import jakarta.persistence.*;
+
+import java.util.Date;
+
+@Entity
+@Table(name = "Recruitments")
+public class Recruitments {
+
+    @jakarta.persistence.Id
+    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)", nullable = false)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    public Integer Id;
+
+    @Column(name = "IrbApplicationId", nullable = false)
+    public Integer IrbApplicationId;
+
+    @Column(name = "UserId", nullable = false)
+    public String  UserId;
+
+    @Column(name = "Strategy")
+    public String Strategy;
+
+    @Column(name = "AreChosenFromRecord", nullable = false)
+    public Integer AreChosenFromRecord;
+
+    @Column(name = "ApprovedPerson")
+    public String ApprovedPerson;
+
+    @Column(name = "HasIdentifiableInformation", nullable = false)
+    public Integer HasIdentifiableInformation;
+
+    @Column(name = "IdentifiableInformation")
+    public String IdentifiableInformation;
+
+    @Column(name = "HasAccess", nullable = false)
+    public Integer HasAccess;
+
+    @Column(name = "WillAccessFromRecord", nullable = false)
+    public Integer WillAccessFromRecord;
+
+    @Column(name = "AccessType")
+    public String AccessType;
+
+    @Column(name = "AccessTypeOther")
+    public String AccessTypeOther;
+
+    @Column(name = "WillSubjectsReceiveAnything", nullable = false)
+    public Integer WillSubjectsReceiveAnything;
+
+    @Column(name = "ReceiveDetail")
+    public String ReceiveDetail;
+
+    @Column(name = "CreatedDate", columnDefinition = "DATE")
+    public Date CreatedDate;
+
+    @Column(name = "UpdatedDate", columnDefinition = "DATE")
+    public Date UpdatedDate;
+}
