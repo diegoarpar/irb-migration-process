@@ -49,9 +49,6 @@ public class App {
         etl = Guice.createInjector().getInstance(ETLTransactionsLogsEmail.class);
         etl.StartETL();
 
-        etl = Guice.createInjector().getInstance(ETLTransactionsLogsChangeUserType.class);
-        etl.StartETL();
-
         etl = Guice.createInjector().getInstance(ETLReviewersApplication.class);
         etl.StartETL();
 
@@ -77,6 +74,9 @@ public class App {
         etl.StartETL();
 
         etl = Guice.createInjector().getInstance(ETLRecruitments.class);
+        etl.StartETL();
+
+        etl = Guice.createInjector().getInstance(ETLTransactionsLogsChangeUserType.class);
         etl.StartETL();
 
         etl = null;

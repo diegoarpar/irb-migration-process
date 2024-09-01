@@ -101,6 +101,43 @@ public class TransformationTransactionLogsChangeUser implements IETLTransformati
             }
         }
 
+        Iterator<Map.Entry<String, FacultySponsors>> facultyIterator = ((Map<String, FacultySponsors>) data[4]).entrySet().iterator();
+
+        while (facultyIterator.hasNext()) {
+            FacultySponsors facultySponsors = facultyIterator.next().getValue();
+            TransactionLogs facultyLog = new TransactionLogs();
+            facultyLog.IrbApplicationId = facultySponsors.IrbApplicationId.Id;
+            facultyLog.UserId = facultySponsors.UserId.Id;
+            facultyLog.Action = "Application Faculty Decision";
+            facultyLog.EventDate = facultySponsors.CreatedDate;
+            if (facultySponsors.DecisionDate != null) {
+                facultyLog.EventDate = facultySponsors.DecisionDate;
+            }
+            facultyLog.EventName = "Application Faculty Decision";
+            facultyLog.Info = "Application Faculty Decision Approved:" + facultySponsors.IsApproved + " " + facultySponsors.Signature;
+            if (facultyLog.EventDate != null) {
+                logs.add(facultyLog);
+            }
+
+        }
+
+        Iterator<Map.Entry<String, ReviewNotes>> reviewNotesIterator = ((Map<String, ReviewNotes>) data[5]).entrySet().iterator();
+
+        while (reviewNotesIterator.hasNext()) {
+            ReviewNotes reviewNote = reviewNotesIterator.next().getValue();
+            TransactionLogs reviewLog = new TransactionLogs();
+            reviewLog.IrbApplicationId = reviewNote.IrbApplicationId.Id;
+            reviewLog.UserId = reviewNote.UserId.Id;
+            reviewLog.Action = "New Note";
+            reviewLog.EventDate = reviewNote.CreatedDate;
+            reviewLog.EventName = "New Note";
+            reviewLog.Info = "New Note:" + reviewNote.Note;
+            if (reviewLog.EventDate != null) {
+                logs.add(reviewLog);
+            }
+
+        }
+
         return logs;
 
     }

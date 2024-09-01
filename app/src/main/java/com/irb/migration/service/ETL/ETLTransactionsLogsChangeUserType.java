@@ -32,15 +32,19 @@ public class ETLTransactionsLogsChangeUserType implements IETL{
         List<IrbApplications> irbApplications = destEM.createQuery("SELECT s FROM IrbApplications s", IrbApplications.class).getResultList();
         List<StandardVotes> standardVotes = destEM.createQuery("SELECT s FROM StandardVotes s", StandardVotes.class).getResultList();
         List<Reviewers> reviewers = destEM.createQuery("SELECT s FROM Reviewers s", Reviewers.class).getResultList();
+        List<FacultySponsors> facultySponsors = destEM.createQuery("SELECT s FROM FacultySponsors s", FacultySponsors.class).getResultList();
+        List<ReviewNotes> reviewNotes = destEM.createQuery("SELECT s FROM ReviewNotes s", ReviewNotes.class).getResultList();
 
         Map<String, AspNetUsers> usersMap = users.stream().collect(Collectors.toMap(data -> data.NormalizedEmail, data -> data));
         Map<String, IrbApplications> applicationMap = irbApplications.stream().collect(Collectors.toMap(data -> data.ApplicationCode, data -> data));
         Map<String, Reviewers> reviewerMap = reviewers.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
         Map<String, StandardVotes> standardVotesMap = standardVotes.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
+        Map<String, FacultySponsors> facultySponsorsMap = facultySponsors.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
+        Map<String, ReviewNotes> reviewNotesMap = reviewNotes.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
         users = null;
 
         // Transform data
-        List<TransactionLogs> transformedData = eltFactoryTransformation.getTransformation("changeuser").TransformData(sourceData, usersMap, applicationMap, reviewerMap, standardVotesMap);
+        List<TransactionLogs> transformedData = eltFactoryTransformation.getTransformation("changeuser").TransformData(sourceData, usersMap, applicationMap, reviewerMap, standardVotesMap, facultySponsorsMap, reviewNotesMap);
 
         // Load data into destination
         destEM.getTransaction().begin();
