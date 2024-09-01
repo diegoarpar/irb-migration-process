@@ -38,7 +38,7 @@ public class ETLTransactionsLogsChangeUserType implements IETL{
         Map<String, AspNetUsers> usersMap = users.stream().collect(Collectors.toMap(data -> data.NormalizedEmail, data -> data));
         Map<String, IrbApplications> applicationMap = irbApplications.stream().collect(Collectors.toMap(data -> data.ApplicationCode, data -> data));
         Map<String, Reviewers> reviewerMap = reviewers.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
-        Map<String, StandardVotes> standardVotesMap = standardVotes.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
+        Map<String, StandardVotes> standardVotesMap = standardVotes.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "-" + data.Id, data -> data, (data1, data2) -> data2));
         Map<String, FacultySponsors> facultySponsorsMap = facultySponsors.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
         Map<String, ReviewNotes> reviewNotesMap = reviewNotes.stream().collect(Collectors.toMap(data -> data.IrbApplicationId + "", data -> data));
         users = null;
