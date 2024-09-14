@@ -9,9 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class TransformationCoInvestigator implements IETLTransformation<CoInvestigators, FCoinvestigator> {
 
@@ -31,81 +31,81 @@ public class TransformationCoInvestigator implements IETLTransformation<CoInvest
                 getCoinvestigator( source.application_id,  source.coinvesti_email1,
                         source.coinvesti_name1,  source.coinvesti_address1, source.coinvesti_sign_init1,
                             source.coinvesti_phone1, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email2,
                             source.coinvesti_name2,  source.coinvesti_address2, source.coinvesti_sign_init2,
                             source.coinvesti_phone2, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email3,
                             source.coinvesti_name3,  source.coinvesti_address3, source.coinvesti_sign_init3,
                             source.coinvesti_phone3, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email4,
                             source.coinvesti_name4,  source.coinvesti_address4, source.coinvesti_sign_init4,
                             source.coinvesti_phone4, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email5,
                             source.coinvesti_name5,  source.coinvesti_address5, source.coinvesti_sign_init5,
                             source.coinvesti_phone5, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email6,
                             source.coinvesti_name6,  source.coinvesti_address6, source.coinvesti_sign_init6,
                             source.coinvesti_phone6, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email7,
                             source.coinvesti_name7,  source.coinvesti_address7, source.coinvesti_sign_init7,
                             source.coinvesti_phone7, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email8,
                             source.coinvesti_name8,  source.coinvesti_address8, source.coinvesti_sign_init8,
                             source.coinvesti_phone8, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email9,
                             source.coinvesti_name9,  source.coinvesti_address9, source.coinvesti_sign_init9,
                             source.coinvesti_phone9, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email10,
                             source.coinvesti_name10,  source.coinvesti_address10, source.coinvesti_sign_init10,
                             source.coinvesti_phone10, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email11,
                             source.coinvesti_name11,  source.coinvesti_address11, source.coinvesti_sign_init11,
                             source.coinvesti_phone11, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_sign_email12,
                             source.coinvesti_name12,  source.coinvesti_address1, source.coinvesti_sign_init12,
                             source.coinvesti_sign_phone12, universities, data[0], data[1]);
 
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email13,
                             source.coinvesti_name13,  source.coinvesti_address13, source.coinvesti_sign_init13,
                             source.coinvesti_phone13, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
 
 
@@ -113,16 +113,25 @@ public class TransformationCoInvestigator implements IETLTransformation<CoInvest
                     getCoinvestigator( source.application_id,  source.coinvesti_email14,
                             source.coinvesti_name14,  source.coinvesti_address14, source.coinvesti_sign_init14,
                             source.coinvesti_phone14, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
             coInvestigator =
                     getCoinvestigator( source.application_id,  source.coinvesti_email15,
                             source.coinvesti_name15,  source.coinvesti_address15, source.coinvesti_sign_init15,
                             source.coinvesti_phone15, universities, data[0], data[1]);
-            if (coInvestigator != null) coInvestigators.add(coInvestigator);
+            if (shouldAddInvestigator(coInvestigator, coInvestigators)) coInvestigators.add(coInvestigator);
 
         }
         return coInvestigators;
+    }
+    
+    private boolean shouldAddInvestigator(CoInvestigators coInvestigator, List<CoInvestigators> coInvestigators) {
+        if (Objects.isNull(coInvestigator) || Strings.isNullOrEmpty(coInvestigator.Email)) {
+            return false;
+        }
+        return coInvestigators
+                .stream()
+                .noneMatch(coPI -> coPI.Email.equalsIgnoreCase(coInvestigator.Email));
     }
 
     private CoInvestigators getCoinvestigator(
