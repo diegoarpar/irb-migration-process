@@ -31,7 +31,7 @@ public class TransformationTransactionLogsEmail implements IETLTransformation<Tr
             IrbApplications app = (IrbApplications) data[0].get(source.application_id != null? source.application_id.toUpperCase(): "");
             TransactionLogs transactionLogs = new TransactionLogs();
             transactionLogs.IrbApplicationId = app != null && !Objects.isNull(app.Id)? app.Id : -1;
-            transactionLogs.UserId = app != null && !Objects.isNull(app.Id)? app.UserId.Id: "-1";
+            transactionLogs.UserId = app != null? app.UserId.Id : null;
             transactionLogs.Action = "Sent_Email";
             transactionLogs.EventDate = source.sentdate;
             transactionLogs.EventName = "Email";

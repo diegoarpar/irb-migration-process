@@ -59,7 +59,7 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
             facultySponsors.Address = source.faculty_sponsor_office;
             facultySponsors.Signature = source.faculty_sponsor_sign;
             facultySponsors.DecisionDate = application.SubmittedDate;
-            facultySponsors.IsApproved = "approved".equalsIgnoreCase(source.factdtlvalidate)? 1: 0;
+            facultySponsors.IsApproved = "approved".equalsIgnoreCase(source.factdtlvalidate);
             facultySponsors.CreatedDate = new Date();
             return facultySponsors;
         }).filter(Objects::nonNull).collect(Collectors.toList());

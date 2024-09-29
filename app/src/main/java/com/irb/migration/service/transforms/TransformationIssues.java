@@ -31,10 +31,12 @@ public class TransformationIssues implements IETLTransformation<Issues, FIssues>
             AspNetUsers user = (AspNetUsers) data[0].get(source.guemailid != null? source.guemailid.toUpperCase(): "");
             AspNetUsers userSolve = (AspNetUsers) data[0].get(source.solved_by != null? source.solved_by.toUpperCase(): "");
             Issues issue = new Issues();
-            issue.UserIdReporter = user != null && Strings.isNullOrEmpty(user.Id)? user.Id : "-1";
+            if (user != null) {
+                issue.UserIdReporter = user.Id;
+            }
             issue.Subject = source.subject;
-            issue.IrbApplicationId = "-1";
-            issue.NotificationFormId = "-1";
+            issue.IrbApplicationId = -1;
+            issue.NotificationFormId = -1;
             issue.Type = getType(source.bug_type);
             issue.Other = source.bug_type_other;
             issue.SourceUrl = source.source_url;
@@ -42,11 +44,13 @@ public class TransformationIssues implements IETLTransformation<Issues, FIssues>
             issue.Status = "solved".equalsIgnoreCase(source.bug_status)? "Closed": "Open"; //TODO
             issue.DeviceInformation = source.os_name_version + " " + source.browser_name_version;
             issue.ResolutionDescription = source.admin_dev_comments;
-            issue.UserIdSolver = userSolve != null && Strings.isNullOrEmpty(userSolve.Id)? userSolve.Id : "-1";
+            if (userSolve != null) {
+                issue.UserIdSolver = userSolve.Id;
+            }
             issue.EventDateCreated = helper.toDateSlash(source.bug_close_date);
             issue.EventDateVisited = issue.EventDateCreated;
             issue.EventDateSolved = issue.EventDateCreated;
-            issue.Sent = Objects.nonNull(issue.EventDateCreated)? 1: 0;
+            issue.Sent = Objects.nonNull(issue.EventDateCreated);
             issue.Visited = issue.Sent;
 
             return issue;

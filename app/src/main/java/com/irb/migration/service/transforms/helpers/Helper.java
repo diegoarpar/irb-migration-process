@@ -72,15 +72,15 @@ public class Helper {
         AspNetUsers aspNetUsers = new AspNetUsers();
         aspNetUsers.NormalizedEmail = guEmail.toUpperCase();
         aspNetUsers.Email = guEmail;
-        aspNetUsers.EmailConfirmed = "1".equalsIgnoreCase(admin_approval)? 1: 0 ;
+        aspNetUsers.EmailConfirmed = "1".equalsIgnoreCase(admin_approval);
         aspNetUsers.UserName = guEmail;
         aspNetUsers.PhoneNumber = contactNo;
-        aspNetUsers.TwoFactorEnabled = 0;
-        aspNetUsers.LockoutEnabled = 1;
+        aspNetUsers.TwoFactorEnabled = false;
+        aspNetUsers.LockoutEnabled = true;
         aspNetUsers.AccessFailedCount = 0;
         aspNetUsers.NormalizedUserName = guEmail.toUpperCase();
         aspNetUsers.SecurityStamp =  generateRandomStamp();
-        aspNetUsers.PhoneNumberConfirmed = Strings.isNullOrEmpty(contactNo)? 0: 1 ;
+        aspNetUsers.PhoneNumberConfirmed = !Strings.isNullOrEmpty(contactNo);
 
         UserProfiles userProfileUser = new UserProfiles();
         userProfileUser.UserId = aspNetUsers;
@@ -132,5 +132,9 @@ public class Helper {
 
     public String trueFalseFromYes(String word) {
         return "yes".equalsIgnoreCase(word)? "True": "False";
+    }
+
+    public Boolean fromYesNoToBoolean(String word) {
+        return "yes".equalsIgnoreCase(word);
     }
 }

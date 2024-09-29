@@ -22,11 +22,12 @@ dependencies {
     implementation group: 'org.hibernate', name: 'hibernate-core', version: '6.5.2.Final'
     implementation group: 'jakarta.persistence', name: 'jakarta.persistence-api', version: '3.2.0'
 
-    implementation group: 'org.hibernate', name: 'hibernate-entitymanager', version: '6.0.0.Alpha7', ext: 'pom'
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '7.0.0.Beta1', ext: 'pom'
     implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '12.6.3.jre11'
     implementation group: 'org.slf4j', name: 'slf4j-api', version: '2.1.0-alpha1'
     implementation group: 'org.slf4j', name: 'slf4j-simple', version: '2.1.0-alpha1'
     implementation group: 'com.google.inject', name: 'guice', version: '7.0.0'
+    implementation group: 'org.postgresql', name: 'postgresql', version: '42.7.3'
 
 }
 
