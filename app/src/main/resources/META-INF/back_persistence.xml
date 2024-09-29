@@ -55,13 +55,16 @@
         <class>com.irb.migration.entity.to.ResearchStudies</class>
         <class>com.irb.migration.entity.to.Recruitments</class>
         <properties>
-            <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
-            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=migrationdb;encrypt=false;trustServerCertificate=true"/>
+            <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/migrationdb"/>
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
             <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.globally_quoted_identifiers" value="true" />
+            <property name="hibernate.physical_naming_strategy" value="com.irb.migration.conf.CustomPhysicalNamingStrategy"/>
         </properties>
     </persistence-unit>
 
@@ -89,13 +92,16 @@
         <class>com.irb.migration.entity.to.ResearchStudies</class>
         <class>com.irb.migration.entity.to.Recruitments</class>
         <properties>
-            <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
-            <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=migrationdb;encrypt=false;trustServerCertificate=true"/>
+            <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5432/migrationdb"/>
             <property name="jakarta.persistence.jdbc.user" value="sa"/>
             <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
             <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.globally_quoted_identifiers" value="true" />
+            <property name="hibernate.physical_naming_strategy" value="com.irb.migration.conf.CustomPhysicalNamingStrategy"/>
         </properties>
     </persistence-unit>
 </persistence>

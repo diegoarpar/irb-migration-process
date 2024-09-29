@@ -46,9 +46,9 @@ public class TransformationSubjectDefines implements IETLTransformation<SubjectD
             subjectDefines.NumSubRecruited = Objects.isNull(source.approx_sub_recruited)? -1: source.approx_sub_recruited;
             subjectDefines.SubRecruitedTypes = getSubRecrutType(source.sub_recruited);
             subjectDefines.SubRecruitedOther = source.sub_recruited_other;
-            subjectDefines.isAvailableEveryOne = 0;
-            subjectDefines.isIncludeGannonStudents = source.research_sub_population != null && source.research_sub_population.toLowerCase().contains("students")? 1: 0;
-            subjectDefines.isInformationIdentifiable = 0;
+            subjectDefines.isAvailableEveryOne = false;
+            subjectDefines.isIncludeGannonStudents = source.research_sub_population != null && source.research_sub_population.toLowerCase().contains("students");
+            subjectDefines.isInformationIdentifiable = false;
 
 
             subjectDefines.CreatedDate = application.SubmittedDate != null? application.SubmittedDate: new Date();

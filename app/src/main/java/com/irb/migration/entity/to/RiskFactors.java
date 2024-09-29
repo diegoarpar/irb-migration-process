@@ -9,7 +9,7 @@ import java.util.Date;
 public class RiskFactors {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
+    @Column(name = "Id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
@@ -22,31 +22,31 @@ public class RiskFactors {
     public AspNetUsers  UserId;
 
     @Column(name = "SubjectRisk")
-    public Integer SubjectRisk;
+    public Boolean SubjectRisk;
 
     @Column(name = "ExperimentalDrug")
-    public Integer ExperimentalDrug;
+    public Boolean ExperimentalDrug;
 
     @Column(name = "MedicalProblem")
-    public Integer MedicalProblem;
+    public Boolean MedicalProblem;
 
     @Column(name = "PhysicalDiscomfort")
-    public Integer PhysicalDiscomfort;
+    public Boolean PhysicalDiscomfort;
 
     @Column(name = "MentalDiscomfort")
-    public Integer MentalDiscomfort;
+    public Boolean MentalDiscomfort;
 
     @Column(name = "ElectricalEquipment")
-    public Integer ElectricalEquipment;
+    public Boolean ElectricalEquipment;
 
     @Column(name = "SubjectRecord")
-    public Integer SubjectRecord;
+    public Boolean SubjectRecord;
 
     @Column(name = "SubjectCoercion")
-    public Integer SubjectCoercion;
+    public Boolean SubjectCoercion;
 
     @Column(name = "SubjectDeception")
-    public Integer SubjectDeception;
+    public Boolean SubjectDeception;
 
     @Lob
     @Column(name = "CoercionDeceptionDetail")
@@ -87,7 +87,7 @@ public class RiskFactors {
     public String Frequency;
 
     @Column(name = "IncludeSomething")
-    public Integer IncludeSomething;
+    public Boolean IncludeSomething;
 
     @Lob
     @Column(name = "InvolvedResearch")

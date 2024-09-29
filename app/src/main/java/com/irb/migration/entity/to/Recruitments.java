@@ -9,7 +9,7 @@ import java.util.Date;
 public class Recruitments {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)", nullable = false)
+    @Column(name = "Id", nullable = false)
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
@@ -23,22 +23,22 @@ public class Recruitments {
     public String Strategy;
 
     @Column(name = "AreChosenFromRecord", nullable = false)
-    public Integer AreChosenFromRecord;
+    public Boolean AreChosenFromRecord;
 
     @Column(name = "ApprovedPerson")
     public String ApprovedPerson;
 
     @Column(name = "HasIdentifiableInformation", nullable = false)
-    public Integer HasIdentifiableInformation;
+    public Boolean HasIdentifiableInformation;
 
     @Column(name = "IdentifiableInformation")
     public String IdentifiableInformation;
 
     @Column(name = "HasAccess", nullable = false)
-    public Integer HasAccess;
+    public Boolean HasAccess;
 
     @Column(name = "WillAccessFromRecord", nullable = false)
-    public Integer WillAccessFromRecord;
+    public Boolean WillAccessFromRecord;
 
     @Column(name = "AccessType")
     public String AccessType;
@@ -47,7 +47,7 @@ public class Recruitments {
     public String AccessTypeOther;
 
     @Column(name = "WillSubjectsReceiveAnything", nullable = false)
-    public Integer WillSubjectsReceiveAnything;
+    public Boolean WillSubjectsReceiveAnything;
 
     @Column(name = "ReceiveDetail")
     public String ReceiveDetail;

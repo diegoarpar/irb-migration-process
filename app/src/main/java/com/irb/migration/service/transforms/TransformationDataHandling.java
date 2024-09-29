@@ -38,9 +38,9 @@ public class TransformationDataHandling implements IETLTransformation<DataHandli
             dataHandling.UserId = application.UserId;
             dataHandling.CollectMethod = getCollectMethod(source.data_collect_method);
             dataHandling.CollectMethodOther = source.data_collect_method + " " +source.field53other;
-            dataHandling.Identifier = "yes".equalsIgnoreCase(source.data_collect_identi)? 1: 0;
-            dataHandling.Analysis = "yes".equalsIgnoreCase(source.data_retain_identi_analysis)? 1: 0;
-            dataHandling.Reporting = "yes".equalsIgnoreCase(source.data_retain_identi_reporting)? 1: 0;
+            dataHandling.Identifier = "yes".equalsIgnoreCase(source.data_collect_identi);
+            dataHandling.Analysis = "yes".equalsIgnoreCase(source.data_retain_identi_analysis);
+            dataHandling.Reporting = "yes".equalsIgnoreCase(source.data_retain_identi_reporting);
             dataHandling.Disseminated = source.research_dissem_sub;
             dataHandling.Field58a = source.storage_arrang;
             dataHandling.Field58b = source.acc_person;

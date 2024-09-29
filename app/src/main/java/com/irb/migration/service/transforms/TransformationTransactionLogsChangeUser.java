@@ -27,7 +27,9 @@ public class TransformationTransactionLogsChangeUser implements IETLTransformati
             TransactionLogs log = new TransactionLogs();
             AspNetUsers user = (AspNetUsers) data[0].get(source.gu_email != null ? source.gu_email.toUpperCase() : "");
             log.IrbApplicationId = -1;
-            log.UserId = user != null && !Objects.isNull(user.Id) ? user.Id : "-1";
+            if (user == null) {
+                continue;
+            }
             log.Action = "Change_User";
             log.EventDate = helper.toDateSlash(source.request_date);
             log.EventName = "Change_User";

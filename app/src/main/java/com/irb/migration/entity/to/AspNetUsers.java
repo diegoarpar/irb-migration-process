@@ -26,7 +26,7 @@ public class AspNetUsers {
     public String NormalizedEmail;
 
     @Column(name = "EmailConfirmed")
-    public Integer EmailConfirmed;
+    public boolean EmailConfirmed;
 
     @Column(name = "PasswordHash")
     public String PasswordHash;
@@ -41,16 +41,16 @@ public class AspNetUsers {
     public String PhoneNumber;
 
     @Column(name = "PhoneNumberConfirmed", nullable = false)
-    public Integer PhoneNumberConfirmed;
+    public Boolean PhoneNumberConfirmed;
 
     @Column(name = "TwoFactorEnabled", nullable = false)
-    public Integer TwoFactorEnabled;
+    public Boolean TwoFactorEnabled;
 
     @Column(name = "LockoutEnd", columnDefinition = "DATE")
     public Date LockoutEnd;
 
     @Column(name = "LockoutEnabled", nullable = false)
-    public Integer LockoutEnabled;
+    public Boolean LockoutEnabled;
 
     @Column(name = "AccessFailedCount",  nullable = false)
     public Integer AccessFailedCount;

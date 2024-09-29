@@ -50,7 +50,7 @@ public class TransformationResearchStudy implements IETLTransformation<ResearchS
                 researchStudies.Agency = "";
             }
 
-            researchStudies.IsApprovalRequired = helper.fromYesNoToInt(source.irb_appvr_req);
+            researchStudies.IsApprovalRequired = helper.fromYesNoToBoolean(source.irb_appvr_req);
             researchStudies.StartDate = helper.toDateMinus(source.data_start_day);
             researchStudies.StartDate = Objects.isNull(researchStudies.StartDate)? new Date():  researchStudies.StartDate;
             researchStudies.EndDate = helper.toDateMinus(source.data_end_day);
@@ -58,13 +58,13 @@ public class TransformationResearchStudy implements IETLTransformation<ResearchS
             researchStudies.Duration = source.projected_std_dur;
             researchStudies.Purpose = source.purpose;
             researchStudies.Method = source.methodology;
-            researchStudies.HasConflict = 0;
-            researchStudies.IsReviewed = 0;
+            researchStudies.HasConflict = false;
+            researchStudies.IsReviewed = false;
             researchStudies.AgencyOther = "";
-            researchStudies.IsUtilizeAcademicRecord = 0;
-            researchStudies.IsAnyIntervention = 0;
+            researchStudies.IsUtilizeAcademicRecord = false;
+            researchStudies.IsAnyIntervention = false;
             researchStudies.Procedure = "";
-            researchStudies.IsRequiredGrant = !Strings.isNullOrEmpty(source.research_std_proposal) && source.research_std_proposal.toLowerCase().contains("grant")? 1: 0;
+            researchStudies.IsRequiredGrant = !Strings.isNullOrEmpty(source.research_std_proposal) && source.research_std_proposal.toLowerCase().contains("grant");
             researchStudies.ResearchProposals = getProposal(source.research_std_proposal);
 
 

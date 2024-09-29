@@ -9,7 +9,7 @@ import java.util.Date;
 public class ResearchStudies {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
+    @Column(name = "Id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
@@ -29,7 +29,7 @@ public class ResearchStudies {
     public String FundingAgency;
 
     @Column(name = "IsApprovalRequired")
-    public Integer IsApprovalRequired;
+    public Boolean IsApprovalRequired;
 
     @Column(name = "StartDate", columnDefinition = "DATE")
     public Date StartDate;
@@ -73,25 +73,25 @@ public class ResearchStudies {
     public String Duration;
 
     @Column(name = "HasConflict")
-    public Integer HasConflict;
+    public Boolean HasConflict;
 
     @Column(name = "InvestigatorId")
     public String InvestigatorId;
 
     @Column(name = "IsRequiredGrant")
-    public Integer IsRequiredGrant;
+    public Boolean IsRequiredGrant;
 
     @Column(name = "IsReviewed")
-    public Integer IsReviewed;
+    public Boolean IsReviewed;
 
     @Column(name = "IsUtilizeAcademicRecord")
-    public Integer IsUtilizeAcademicRecord;
+    public Boolean IsUtilizeAcademicRecord;
 
     @Column(name = "ReviewerName")
     public String ReviewerName;
 
     @Column(name = "IsAnyIntervention")
-    public Integer IsAnyIntervention;
+    public Boolean IsAnyIntervention;
 
     @Column(name = "OtherResearchDesign")
     public String OtherResearchDesign;

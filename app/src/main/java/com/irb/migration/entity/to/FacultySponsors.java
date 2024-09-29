@@ -9,7 +9,7 @@ import java.util.Date;
 public class FacultySponsors {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
+    @Column(name = "Id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
@@ -44,7 +44,7 @@ public class FacultySponsors {
     public Date UpdatedDate;
 
     @Column(name = "IsApproved")
-    public Integer IsApproved ;
+    public Boolean IsApproved ;
 
     @Column(name = "DecisionDate", columnDefinition = "DATE")
     public Date DecisionDate ;

@@ -9,18 +9,18 @@ import java.util.Date;
 public class Issues {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
+    @Column(name = "Id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
     @Column(name = "IrbApplicationId")
-    public String IrbApplicationId;
+    public Integer IrbApplicationId;
 
     @Column(name = "UserIdSolver")
     public String  UserIdSolver;
 
     @Column(name = "NotificationFormId")
-    public String NotificationFormId;
+    public Integer NotificationFormId;
 
     @Column(name = "UserIdReporter")
     public String  UserIdReporter;
@@ -76,10 +76,10 @@ public class Issues {
 
     @Lob
     @Column(name = "Sent")
-    public Integer Sent ;
+    public Boolean Sent ;
 
     @Lob
     @Column(name = "Visited")
-    public Integer Visited ;
+    public Boolean Visited ;
 
 }
