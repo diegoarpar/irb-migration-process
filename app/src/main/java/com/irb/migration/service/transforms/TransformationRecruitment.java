@@ -44,21 +44,21 @@ public class TransformationRecruitment implements IETLTransformation<Recruitment
 
             recruitment.IrbApplicationId = application.Id;
             recruitment.UserId = application.UserId.Id;
-            recruitment.WillSubjectsReceiveAnything = 0;
-            recruitment.WillAccessFromRecord = 0;
-            recruitment.AreChosenFromRecord = 0;
-            recruitment.HasAccess = 0;
-            recruitment.HasIdentifiableInformation = 0;
+            recruitment.WillSubjectsReceiveAnything = false;
+            recruitment.WillAccessFromRecord = false;
+            recruitment.AreChosenFromRecord = false;
+            recruitment.HasAccess = false;
+            recruitment.HasIdentifiableInformation = false;
             if (!Strings.isNullOrEmpty(source.sub_rewarded_compen) && source.sub_rewarded_compen.length() > 4) {
-                recruitment.WillSubjectsReceiveAnything = 1;
+                recruitment.WillSubjectsReceiveAnything = true;
                 recruitment.ReceiveDetail = source.sub_rewarded_compen;
             }
 
             if (dataHandling != null) {
                 recruitment.Strategy = dataHandling.research_dissem_sub;
-                recruitment.HasAccess = "yes".equalsIgnoreCase(dataHandling.data_collect_identi)? 1: 0;
-                recruitment.HasIdentifiableInformation = "yes".equalsIgnoreCase(dataHandling.data_collect_identi)? 1: 0;
-                recruitment.AreChosenFromRecord = "archival".contains(Strings.isNullOrEmpty(dataHandling.data_collect_method)? "": dataHandling.data_collect_method.toLowerCase())? 1: 0;
+                recruitment.HasAccess = "yes".equalsIgnoreCase(dataHandling.data_collect_identi);
+                recruitment.HasIdentifiableInformation = "yes".equalsIgnoreCase(dataHandling.data_collect_identi);
+                recruitment.AreChosenFromRecord = "archival".contains(Strings.isNullOrEmpty(dataHandling.data_collect_method)? "": dataHandling.data_collect_method.toLowerCase());
                 recruitment.ApprovedPerson = dataHandling.acc_person;
                 recruitment.IdentifiableInformation = dataHandling.sch_mthd_deidenti_data;
             }

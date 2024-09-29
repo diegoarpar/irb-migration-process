@@ -9,7 +9,7 @@ import java.util.Date;
 public class SubjectDefines {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
+    @Column(name = "Id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
@@ -52,13 +52,13 @@ public class SubjectDefines {
     public String inclusionCriterial;
 
     @Column(name = "isAvailableEveryOne")
-    public Integer isAvailableEveryOne;
+    public Boolean isAvailableEveryOne;
 
     @Column(name = "isIncludeGannonStudents")
-    public Integer isIncludeGannonStudents;
+    public Boolean isIncludeGannonStudents;
 
     @Column(name = "isInformationIdentifiable")
-    public Integer isInformationIdentifiable;
+    public Boolean isInformationIdentifiable;
 
     @Lob
     @Column(name = "subjectConfidentiality")

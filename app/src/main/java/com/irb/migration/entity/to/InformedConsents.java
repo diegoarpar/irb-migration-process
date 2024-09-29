@@ -9,7 +9,7 @@ import java.util.Date;
 public class InformedConsents {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
+    @Column(name = "Id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
@@ -30,136 +30,136 @@ public class InformedConsents {
     public String FormDistribution;
 
     @Column(name = "SubjectWithdraw")
-    public Integer SubjectWithdraw;
+    public Boolean SubjectWithdraw;
 
     @Column(name = "SubjectWithdrawOther")
     public String SubjectWithdrawOther;
 
     @Column(name = "WrittenConsent")
-    public Integer WrittenConsent;
+    public Boolean WrittenConsent;
 
     @Column(name = "WrittenConsentOther")
     public String WrittenConsentOther;
 
     @Column(name = "OralConsent")
-    public Integer OralConsent;
+    public Boolean OralConsent;
 
     @Column(name = "OralConsentIOther")
     public String OralConsentIOther;
 
     @Column(name = "MinorParticipate")
-    public Integer MinorParticipate;
+    public Boolean MinorParticipate;
 
     @Column(name = "MinorParticipateOther")
     public String MinorParticipateOther;
 
     @Column(name = "MinorSubject")
-    public Integer MinorSubject;
+    public Boolean MinorSubject;
 
     @Column(name = "MinorSubjectOther")
     public String MinorSubjectOther;
 
     @Column(name = "PrincipalConcent")
-    public Integer PrincipalConcent;
+    public Boolean PrincipalConcent;
 
     @Column(name = "PrincipalConcentOther")
     public String PrincipalConcentOther;
 
     @Column(name = "R01")
-    public Integer R01;
+    public Boolean R01;
 
     @Column(name = "R02")
-    public Integer R02;
+    public Boolean R02;
 
     @Column(name = "R03")
-    public Integer R03;
+    public Boolean R03;
 
     @Column(name = "R04")
-    public Integer R04;
+    public Boolean R04;
 
     @Column(name = "R05")
-    public Integer R05;
+    public Boolean R05;
 
     @Column(name = "R06")
-    public Integer R06;
+    public Boolean R06;
 
     @Column(name = "R07")
-    public Integer R07;
+    public Boolean R07;
 
     @Column(name = "R08")
-    public Integer R08;
+    public Boolean R08;
 
     @Column(name = "R09")
-    public Integer R09;
+    public Boolean R09;
 
     @Column(name = "R10")
-    public Integer R10;
+    public Boolean R10;
 
     @Column(name = "R11")
-    public Integer R11;
+    public Boolean R11;
 
     @Column(name = "R12")
-    public Integer R12;
+    public Boolean R12;
 
     @Column(name = "R13")
-    public Integer R13;
+    public Boolean R13;
 
     @Column(name = "R14")
-    public Integer R14;
+    public Boolean R14;
 
     @Column(name = "R15")
-    public Integer R15;
+    public Boolean R15;
 
     @Column(name = "R16")
-    public Integer R16;
+    public Boolean R16;
 
     @Column(name = "R17")
-    public Integer R17;
+    public Boolean R17;
 
     @Column(name = "R01R17Other")
     public String R01R17Other;
 
     @Column(name = "R18")
-    public Integer R18;
+    public Boolean R18;
 
     @Column(name = "R19")
-    public Integer R19;
+    public Boolean R19;
 
     @Column(name = "R20")
-    public Integer R20;
+    public Boolean R20;
 
     @Column(name = "R21")
-    public Integer R21;
+    public Boolean R21;
 
     @Column(name = "R22")
-    public Integer R22;
+    public Boolean R22;
 
     @Column(name = "R23")
-    public Integer R23;
+    public Boolean R23;
 
     @Column(name = "R24")
-    public Integer R24;
+    public Boolean R24;
 
     @Column(name = "R25")
-    public Integer R25;
+    public Boolean R25;
 
     @Column(name = "R26")
-    public Integer R26;
+    public Boolean R26;
 
     @Column(name = "R27")
-    public Integer R27;
+    public Boolean R27;
 
     @Column(name = "R28")
-    public Integer R28;
+    public Boolean R28;
 
     @Column(name = "R29")
-    public Integer R29;
+    public Boolean R29;
 
     @Column(name = "R30")
-    public Integer R30;
+    public Boolean R30;
 
     @Column(name = "R31")
-    public Integer R31;
+    public Boolean R31;
 
     @Column(name = "CreatedDate", columnDefinition = "DATE")
     public Date CreatedDate;

@@ -6,9 +6,8 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 
 
-@Entity
 @Table(name = "tblirbappstandarddecision")
-@Embeddable
+@Entity
 public class FStandardDecision implements Serializable {
 
     private static final long serialVersionUID = -909206262878526790L;

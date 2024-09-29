@@ -9,7 +9,7 @@ import java.util.Date;
 public class DataHandling {
 
     @jakarta.persistence.Id
-    @Column(name = "Id", columnDefinition = "NUMERIC(19,0)")
+    @Column(name = "Id")
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     public Integer Id;
 
@@ -30,13 +30,13 @@ public class DataHandling {
     public String CollectMethodOther;
 
     @Column(name = "Identifier")
-    public Integer Identifier;
+    public Boolean Identifier;
 
     @Column(name = "Analysis")
-    public Integer Analysis;
+    public Boolean Analysis;
 
     @Column(name = "Reporting")
-    public Integer Reporting;
+    public Boolean Reporting;
 
     @Lob
     @Column(name = "Disseminated")
