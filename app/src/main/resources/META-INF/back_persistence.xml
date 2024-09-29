@@ -57,7 +57,9 @@
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://EC2AMAZ-TQPGUI6\\SQLEXPRESS:1433;databaseName=migrationdb;integratedSecurity=true;encrypt=false;maxPoolSize=200"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=migrationdb;encrypt=false;trustServerCertificate=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
             <property name="hibernate.show_sql" value="false"/>
         </properties>
@@ -89,7 +91,9 @@
         <properties>
             <property name="jakarta.persistence.jdbc.dialect" value="org.hibernate.dialect.SQLServerDialect"/>
             <property name="jakarta.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://EC2AMAZ-TQPGUI6\\SQLEXPRESS:1433;databaseName=migrationdb;integratedSecurity=true;encrypt=false;maxPoolSize=200"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:sqlserver://127.0.0.1:1433;databaseName=migrationdb;encrypt=false;trustServerCertificate=true"/>
+            <property name="jakarta.persistence.jdbc.user" value="sa"/>
+            <property name="jakarta.persistence.jdbc.password" value="Gannon12345#"/>
             <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
             <property name="hibernate.show_sql" value="false"/>
         </properties>
