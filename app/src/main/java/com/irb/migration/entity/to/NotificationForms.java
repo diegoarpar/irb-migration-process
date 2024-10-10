@@ -39,14 +39,14 @@ public class NotificationForms {
     @Column(name = "AssignedUserId")
     public String AssignedUserId;
 
-    @Lob
+    
     @Column(name = "Signature")
     public String Signature;
 
     @Column(name = "DecisionDate", columnDefinition = "DATE")
     public Date DecisionDate;
 
-    @Lob
+    
     @Column(name = "Observation")
     public String Observation;
 
@@ -56,7 +56,7 @@ public class NotificationForms {
     @Column(name = "ReceivedBy")
     public String ReceivedBy;
 
-    @Lob
+    
     @Column(name = "ReceivedByDate", columnDefinition = "DATE")
     public Date ReceivedByDate;
 

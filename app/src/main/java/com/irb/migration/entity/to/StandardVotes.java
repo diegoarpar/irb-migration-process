@@ -19,19 +19,19 @@ public class StandardVotes {
     @Column(name = "UserId")
     public String UserId;
 
-    @Lob
+    
     @Column(name = "Decision")
     public String Decision;
 
 
-    @Lob
+    
     @Column(name = "Reason")
     public String Reason;
 
     @Column(name = "CreatedDate", columnDefinition = "DATE")
     public Date CreatedDate;
 
-    @Lob
+    
     @Column(name = "UpdatedDate")
     public Date UpdatedDate;
 

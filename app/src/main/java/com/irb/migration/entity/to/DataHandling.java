@@ -21,11 +21,11 @@ public class DataHandling {
     @JoinColumn(name="UserId", nullable=false)
     public AspNetUsers  UserId;
 
-    @Lob
+    
     @Column(name = "CollectMethod")
     public String CollectMethod;
 
-    @Lob
+    
     @Column(name = "CollectMethodOther")
     public String CollectMethodOther;
 
@@ -38,27 +38,27 @@ public class DataHandling {
     @Column(name = "Reporting")
     public Boolean Reporting;
 
-    @Lob
+    
     @Column(name = "Disseminated")
     public String Disseminated;
 
-    @Lob
+    
     @Column(name = "Field58a")
     public String Field58a;
 
-    @Lob
+    
     @Column(name = "Field58b")
     public String Field58b;
 
-    @Lob
+    
     @Column(name = "Field58c")
     public String Field58c;
 
-    @Lob
+    
     @Column(name = "Field58d")
     public String Field58d;
 
-    @Lob
+    
     @Column(name = "Field58e")
     public String Field58e;
 

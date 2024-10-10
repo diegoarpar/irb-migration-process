@@ -30,7 +30,7 @@ public class ReviewNotes {
     @Column(name = "Type")
     public String Type;
 
-    @Lob
+    
     @Column(name = "Note")
     public String Note;
 

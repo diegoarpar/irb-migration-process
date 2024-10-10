@@ -21,15 +21,15 @@ public class Documents {
     @JoinColumn(name="UserId", nullable=false)
     public AspNetUsers  UserId;
 
-    @Lob
+    
     @Column(name = "Type")
     public String Type;
 
-    @Lob
+    
     @Column(name = "Name")
     public String Name;
 
-    @Lob
+    
     @Column(name = "Url")
     public String Url;
 
@@ -39,7 +39,7 @@ public class Documents {
     @Column(name = "UpdatedDate", columnDefinition = "DATE")
     public Date UpdatedDate;
 
-    @Lob
+    
     @Column(name = "Classification")
     public String Classification;
 

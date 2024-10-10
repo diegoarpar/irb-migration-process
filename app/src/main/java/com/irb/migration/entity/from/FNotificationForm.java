@@ -42,7 +42,7 @@ public class FNotificationForm {
     @Column(name = "app_status")
     public String app_status;
 
-    @Lob
+    
     @Column(name = "reason")
     public String reason;
 }

@@ -25,11 +25,11 @@ public class Issues {
     @Column(name = "UserIdReporter")
     public String  UserIdReporter;
 
-    @Lob
+    
     @Column(name = "Action")
     public String Action;
 
-    @Lob
+    
     @Column(name = "Subject")
     public String Subject;
 
@@ -42,43 +42,43 @@ public class Issues {
     @Column(name = "EventDateSolved", columnDefinition = "DATE" )
     public Date EventDateSolved;
 
-    @Lob
+    
     @Column(name = "EventName")
     public String EventName;
 
-    @Lob
+    
     @Column(name = "Description")
     public String Description;
 
-    @Lob
+    
     @Column(name = "Other")
     public String Other;
 
-    @Lob
+    
     @Column(name = "SourceUrl")
     public String SourceUrl;
 
-    @Lob
+    
     @Column(name = "DeviceInformation")
     public String DeviceInformation;
 
-    @Lob
+    
     @Column(name = "ResolutionDescription")
     public String ResolutionDescription;
 
-    @Lob
+    
     @Column(name = "Type")
     public String Type;
 
-    @Lob
+    
     @Column(name = "Status")
     public String Status;
 
-    @Lob
+    
     @Column(name = "Sent")
     public Boolean Sent ;
 
-    @Lob
+    
     @Column(name = "Visited")
     public Boolean Visited ;
 

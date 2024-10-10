@@ -22,11 +22,11 @@ public class NonStandards {
     @JoinColumn(name="UserId", nullable=false)
     public AspNetUsers UserId;
 
-    @Lob
+    
     @Column(name = "Category")
     public String Category;
 
-    @Lob
+    
     @Column(name = "Reason")
     public String Reason;
 

@@ -28,7 +28,7 @@ public class TransactionLogs {
     @Column(name = "EventName")
     public String EventName;
 
-    @Lob
+    
     @Column(name = "Info")
     public String Info;
 

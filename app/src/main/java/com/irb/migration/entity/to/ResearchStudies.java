@@ -21,7 +21,7 @@ public class ResearchStudies {
     @JoinColumn(name="UserId", nullable=false)
     public AspNetUsers  UserId;
 
-    @Lob
+    
     @Column(name = "ResearchProposals")
     public String ResearchProposals;
 
@@ -37,11 +37,11 @@ public class ResearchStudies {
     @Column(name = "EndDate", columnDefinition = "DATE")
     public Date EndDate;
 
-    @Lob
+    
     @Column(name = "Purpose")
     public String Purpose;
 
-    @Lob
+    
     @Column(name = "Method")
     public String Method;
 

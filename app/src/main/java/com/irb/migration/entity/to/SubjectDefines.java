@@ -60,23 +60,23 @@ public class SubjectDefines {
     @Column(name = "isInformationIdentifiable")
     public Boolean isInformationIdentifiable;
 
-    @Lob
+    
     @Column(name = "subjectConfidentiality")
     public String subjectConfidentiality;
 
-    @Lob
+    
     @Column(name = "subjectLocation")
     public String subjectLocation;
 
-    @Lob
+    
     @Column(name = "whatIdentifiers")
     public String whatIdentifiers;
 
-    @Lob
+    
     @Column(name = "whenIdentifyData")
     public String whenIdentifyData;
 
-    @Lob
+    
     @Column(name = "whoHaveAccess")
     public String whoHaveAccess;
 

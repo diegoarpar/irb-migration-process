@@ -28,22 +28,22 @@ public class Reviewers {
     @Column(name = "Status")
     public String Status;
 
-    @Lob
+    
     @Column(name = "Signature")
     public String Signature;
 
     @Column(name = "DecisionDate", columnDefinition = "DATE")
     public Date DecisionDate;
 
-    @Lob
+    
     @Column(name = "Description")
     public String Description;
 
-    @Lob
+    
     @Column(name = "Decision")
     public String Decision;
 
-    @Lob
+    
     @Column(name = "ApprovalLetter")
     public String ApprovalLetter;
 

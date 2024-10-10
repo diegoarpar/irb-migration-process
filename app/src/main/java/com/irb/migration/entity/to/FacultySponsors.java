@@ -21,19 +21,19 @@ public class FacultySponsors {
     @JoinColumn(name="UserId", nullable=false)
     public AspNetUsers  UserId;
 
-    @Lob
+    
     @Column(name = "SponsorDegree")
     public String SponsorDegree;
 
-    @Lob
+    
     @Column(name = "Email")
     public String Email;
 
-    @Lob
+    
     @Column(name = "Fullname")
     public String Fullname;
 
-    @Lob
+    
     @Column(name = "ReseachDescription")
     public String ReseachDescription;
 
@@ -49,7 +49,7 @@ public class FacultySponsors {
     @Column(name = "DecisionDate", columnDefinition = "DATE")
     public Date DecisionDate ;
 
-    @Lob
+    
     @Column(name = "Signature")
     public String Signature;
 
