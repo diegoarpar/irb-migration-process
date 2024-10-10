@@ -33,19 +33,10 @@ public class TransformationFacultySponsors implements IETLTransformation<Faculty
                 return null;
             }
             IrbApplications application = (IrbApplications) data[1].get(source.application_id.toUpperCase());
-            Universities universities = (Universities) data[2].get("gannon");
             UserProfiles sponsor = (UserProfiles) data[0].get(source.email.toUpperCase());
             if (application == null) {
                 LOGGER.error("MIGRATION: IRB does not exist when migrate sponsor " + source.application_id);
                 return null;
-            }
-            if (sponsor == null) {
-                sponsor = helper.getUserProfile(source.email, source.telephone, source.faculty_sponsor_sign, "", "",
-                        "", "", application.SubmittedDate, "", "", "",
-                        "", "", "no", "Faculty", "no", "no"
-                        , source.faculty_sponsor_office, universities);
-                LOGGER.info("MIGRATION: IRB creating new user " + sponsor.UserId.Email);
-                data[0].put(sponsor.UserId.NormalizedEmail, sponsor);
             }
 
             FacultySponsors facultySponsors = new FacultySponsors();

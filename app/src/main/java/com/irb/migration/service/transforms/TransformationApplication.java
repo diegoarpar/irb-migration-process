@@ -5,17 +5,11 @@ import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.helpers.Helper;
 import jakarta.inject.Inject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class TransformationApplication implements IETLTransformation<IrbApplications, FApplicationFormBasic> {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(TransformationApplication.class.getName());
 
     public List<IrbApplications> TransformData(List<FApplicationFormBasic> sourceData) {
 
@@ -30,16 +24,6 @@ public class TransformationApplication implements IETLTransformation<IrbApplicat
         return origin.stream().map(source -> {
             IrbApplications  application = new IrbApplications();
             UserProfiles userProfiles = (UserProfiles) data[0].get(source.gu_email.toUpperCase());
-            Universities universities = (Universities) data[1].get("gannon");
-            if (userProfiles == null) {
-                userProfiles = helper.getUserProfile(source.gu_email, source.telephone, source.principalinvestigator, "",
-                        "", "", "", helper.toDateSlash(source.date_of_submission),
-                        "", "", "", "", "", "yes", source.status, "no", "no",
-                        source.investigator_mail_add, universities);
-
-                data[0].put(userProfiles.UserId.NormalizedEmail, userProfiles);
-                LOGGER.info("MIGRATION: New User " + source.gu_email);
-            }
             application.UserId = userProfiles.UserId;
             if (Strings.isNullOrEmpty(userProfiles.Address) && !Strings.isNullOrEmpty(source.investigator_mail_add)) {
                 userProfiles.Address = source.investigator_mail_add;

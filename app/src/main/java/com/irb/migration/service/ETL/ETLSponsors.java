@@ -9,7 +9,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,18 +39,11 @@ public class ETLSponsors implements IETL{
         applications = null;
         users = null;
         // Transform data
-        List<FacultySponsors> transformedData = eltFactoryTransformation.getTransformation("sponsor").TransformData(sourceData, usersMap, applicatinosMap, univerisityMap);
 
         // Load data into destination
         destEM.getTransaction().begin();
 
-        Iterator<Map.Entry<String, UserProfiles>> userUpdated = usersMap.entrySet().iterator();
-        while (userUpdated.hasNext()) {
-            destEM.persist(userUpdated.next().getValue());
-        }
-        users = destEM.createQuery("SELECT s FROM UserProfiles s", UserProfiles.class).getResultList();
-        usersMap = users.stream().collect(Collectors.toMap(aspNetUsers -> aspNetUsers.UserId.NormalizedEmail, aspNetUsers -> aspNetUsers));
-        transformedData = eltFactoryTransformation.getTransformation("sponsor").TransformData(sourceData, usersMap, applicatinosMap, univerisityMap);
+        List<FacultySponsors> transformedData = eltFactoryTransformation.getTransformation("sponsor").TransformData(sourceData, usersMap, applicatinosMap, univerisityMap);
 
 
         for (FacultySponsors destEntity : transformedData) {

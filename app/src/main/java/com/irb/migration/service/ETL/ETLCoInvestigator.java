@@ -1,6 +1,5 @@
 package com.irb.migration.service.ETL;
 
-import com.irb.migration.entity.from.FApplicationFormBasic;
 import com.irb.migration.entity.from.FCoinvestigator;
 import com.irb.migration.entity.to.*;
 import com.irb.migration.service.transforms.ELTFactoryTransformation;
@@ -10,7 +9,6 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -40,16 +38,10 @@ public class ETLCoInvestigator implements IETL{
         applications = null;
         users = null;
         // Transform data
-        List<CoInvestigators> transformedData = eltFactoryTransformation.getTransformation("coinvestigator").TransformData(sourceData, usersMap, applicatinosMap, univerisityMap);
 
         destEM.getTransaction().begin();
-        // Load data into destination
-        Iterator<Map.Entry<String, UserProfiles>> userUpdated = usersMap.entrySet().iterator();
-        while (userUpdated.hasNext()) {
-            destEM.persist(userUpdated.next().getValue());
-        }
-        users = destEM.createQuery("SELECT s FROM UserProfiles s", UserProfiles.class).getResultList();
-        transformedData = eltFactoryTransformation.getTransformation("coinvestigator").TransformData(sourceData, usersMap, applicatinosMap, univerisityMap);
+
+        List<CoInvestigators> transformedData = eltFactoryTransformation.getTransformation("coinvestigator").TransformData(sourceData, usersMap, applicatinosMap, univerisityMap);
 
         for (CoInvestigators destEntity : transformedData) {
             destEM.persist(destEntity);
