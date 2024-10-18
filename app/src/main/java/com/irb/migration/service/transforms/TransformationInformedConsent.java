@@ -92,7 +92,7 @@ public class TransformationInformedConsent implements IETLTransformation<Informe
     }
 
     private String getConsentType(String typeOfConsent) {
-        String consent = "1|Written (or electronic)|%s, 2|Child Assent|%s, 3|Oral|%s, 4|Information Sheet|%s, 5|Consent of participants subjects 18 years of age and older|%s, 6|Request for consent to be waived|%s";
+        String consent = "1|Written (or electronic)|%s, 2|Child Assent|%s, 3|Oral|%s, 4|Information Sheet|%s, 5|Consent of participants 18 years of age and older|%s, 6|Request for consent to be waived|%s";
         String written = contains("written", typeOfConsent);
         String child = contains("minors", typeOfConsent);
         String oral = contains("oral", typeOfConsent);
