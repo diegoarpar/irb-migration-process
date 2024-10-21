@@ -39,7 +39,7 @@ public class TransformationUserApp implements IETLTransformation<UserProfiles, F
                 if (userProfiles == null) {
                     userProfiles = helper.getUserProfile(app.gu_email, app.telephone, app.principalinvestigator, app.princi_investi_sign,
                             "", "", "", helper.toDateSlash(app.date_of_submission),
-                            "", "", "", "", "", "yes", "Student", "no", "no",
+                            "", "", "", "", "", "1", "Student", "no", "no",
                             app.investigator_mail_add, universities);
 
                     data[0].put(userProfiles.UserId.NormalizedEmail, userProfiles);
@@ -53,7 +53,7 @@ public class TransformationUserApp implements IETLTransformation<UserProfiles, F
                 if (userProfiles == null) {
                     userProfiles = helper.getUserProfile(app.email, app.telephone, app.sponsor_name_degree, app.faculty_sponsor_sign, "",
                             "", "", new Date(), "", "", "",
-                            "", "", "yes", "Faculty", "no", "no"
+                            "", "", "1", "Faculty", "no", "no"
                             , app.faculty_sponsor_office, universities);
 
                     data[0].put(userProfiles.UserId.NormalizedEmail, userProfiles);
