@@ -101,7 +101,7 @@ public class Helper {
         userProfileUser.CreatedDate = new Date();
         return userProfileUser;
     }
-    private String getRoles(String userType, String isUserAdmin, String hasAdminPrivilages) {
+    public String getRoles(String userType, String isUserAdmin, String hasAdminPrivilages) {
         String role = "";
         if (!Strings.isNullOrEmpty(userType)) {
             role = switch (userType) {

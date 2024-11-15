@@ -13,73 +13,9 @@ public class App {
 
     public static void main(String[] args) {
         System.setProperty("eclipselink.ddl-generation", "update");
-        IETL etl = Guice.createInjector().getInstance(ETLUsers.class);
+        IETL etl = Guice.createInjector().getInstance(ETLUsersUpdateRoles.class);
         etl.StartETL();
 
-        etl = Guice.createInjector().getInstance(ETLUserClaims.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLApplications.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLDocuments.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLSponsors.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLScreening.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLCoInvestigator.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLDatahandling.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLIssues.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLExpedited.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLExempted.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLTransactionsLogsEmail.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLReviewersApplication.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLVote.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLInformedConsents.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLRiskFactors.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLNotificationForms.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLNotes.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLSubjectDefines.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLResearchStudy.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLRecruitments.class);
-        etl.StartETL();
-
-        etl = Guice.createInjector().getInstance(ETLTransactionsLogsChangeUserType.class);
-        etl.StartETL();
-
-        etl = null;
 
         System.out.println(new App().getGreeting());
     }

@@ -25,7 +25,7 @@ public class TransformationUserClaims implements IETLTransformation<AspNetUserCl
     public List<AspNetUserClaims> TransformData(List<FUserDetails> origin, Map... data) {
         List<AspNetUserClaims> list = new ArrayList<>();
         for (FUserDetails o : origin ) {
-            String role = getRoles(o.user_type, o.IsUserAdmin, o.HasAdminPrivilages);
+            String role = helper.getRoles(o.user_type, o.IsUserAdmin, o.HasAdminPrivilages);
             AspNetUsers user = (AspNetUsers) data[0].get(o.gu_email.toUpperCase());
             String[] roles = role.split(",");
             for (String s : roles) {
@@ -39,26 +39,6 @@ public class TransformationUserClaims implements IETLTransformation<AspNetUserCl
         return list;
     }
 
-    private String getRoles(String userType, String isUserAdmin, String hasAdminPrivilages) {
-        String role = "";
-        if (!Strings.isNullOrEmpty(userType)) {
-            role = switch (userType) {
-                case "Student" -> "student";
-                case "IRB Staff" -> "irbmember";
-                case "GU Staff" -> "irbchair";
-                case "Faculty" -> "faculty";
-                case "Admin" -> "irbchair,admin";
-                default -> role;
-            };
-            if ("yes".equalsIgnoreCase(isUserAdmin) || "yes".equalsIgnoreCase(hasAdminPrivilages)) {
-                if (!Strings.isNullOrEmpty(role) && !role.toLowerCase().contains("admin")) {
-                    role = String.format("%s,%s", role, "admin");
-                } else {
-                    role = "irbchair,admin";
-                }
-            }
-        }
-        return role;
-    }
+
 
 }

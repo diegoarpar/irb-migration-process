@@ -9,6 +9,7 @@ public class ELTFactoryTransformation {
         switch (key) {
             case "application" : return Guice.createInjector().getInstance(TransformationApplication.class);
             case "user" : return Guice.createInjector().getInstance(TransformationUserProfiles.class);
+            case "updateusers" : return Guice.createInjector().getInstance(TransformationUserUpdateProfiles.class);
             case "user_co" : return Guice.createInjector().getInstance(TransformationUserCoInv.class);
             case "user_app" : return Guice.createInjector().getInstance(TransformationUserApp.class);
             case "sponsor" : return Guice.createInjector().getInstance(TransformationFacultySponsors.class);
