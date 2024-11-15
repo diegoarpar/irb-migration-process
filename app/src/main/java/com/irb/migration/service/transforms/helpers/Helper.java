@@ -107,7 +107,7 @@ public class Helper {
             role = switch (userType) {
                 case "Student" -> "student";
                 case "IRB Staff" -> "irbmember";
-                case "GU Staff" -> "irbchair";
+                case "GU Staff" -> "staff";
                 case "Faculty" -> "faculty";
                 case "Admin" -> "irbchair,admin";
                 default -> role;
