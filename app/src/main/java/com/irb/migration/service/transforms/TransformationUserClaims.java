@@ -28,6 +28,9 @@ public class TransformationUserClaims implements IETLTransformation<AspNetUserCl
             String role = helper.getRoles(o.user_type, o.IsUserAdmin, o.HasAdminPrivilages);
             AspNetUsers user = (AspNetUsers) data[0].get(o.gu_email.toUpperCase());
             String[] roles = role.split(",");
+            if (user == null) {
+                continue;
+            }
             for (String s : roles) {
                 AspNetUserClaims aspNetUserClaims = new AspNetUserClaims();
                 aspNetUserClaims.UserId = user;
